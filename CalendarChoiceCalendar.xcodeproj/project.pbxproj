@@ -13,6 +13,8 @@
 		8D543B762529ACAD00A64939 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D543B752529ACAD00A64939 /* Preview Assets.xcassets */; };
 		8D543B782529ACAD00A64939 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D543B772529ACAD00A64939 /* Persistence.swift */; };
 		8D543B7B2529ACAD00A64939 /* CalendarChoiceCalendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8D543B792529ACAD00A64939 /* CalendarChoiceCalendar.xcdatamodeld */; };
+		8D543B842529DF7F00A64939 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D543B832529DF7F00A64939 /* MainView.swift */; };
+		8D543B882529E22300A64939 /* EventsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D543B872529E22300A64939 /* EventsModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		8D543B772529ACAD00A64939 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		8D543B7A2529ACAD00A64939 /* CalendarChoiceCalendar.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CalendarChoiceCalendar.xcdatamodel; sourceTree = "<group>"; };
 		8D543B7C2529ACAD00A64939 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D543B832529DF7F00A64939 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		8D543B872529E22300A64939 /* EventsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				8D543B7C2529ACAD00A64939 /* Info.plist */,
 				8D543B792529ACAD00A64939 /* CalendarChoiceCalendar.xcdatamodeld */,
 				8D543B742529ACAD00A64939 /* Preview Content */,
+				8D543B832529DF7F00A64939 /* MainView.swift */,
+				8D543B872529E22300A64939 /* EventsModel.swift */,
 			);
 			path = CalendarChoiceCalendar;
 			sourceTree = "<group>";
@@ -147,6 +153,8 @@
 				8D543B782529ACAD00A64939 /* Persistence.swift in Sources */,
 				8D543B712529ACAC00A64939 /* ContentView.swift in Sources */,
 				8D543B7B2529ACAD00A64939 /* CalendarChoiceCalendar.xcdatamodeld in Sources */,
+				8D543B842529DF7F00A64939 /* MainView.swift in Sources */,
+				8D543B882529E22300A64939 /* EventsModel.swift in Sources */,
 				8D543B6F2529ACAC00A64939 /* CalendarChoiceCalendarApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
