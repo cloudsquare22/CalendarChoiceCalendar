@@ -16,10 +16,12 @@ struct MainView: View {
                 ForEach(self.eventsModel.events, id: \.self) { event in
                     VStack {
                         HStack {
-                            Text(event.startDate.description)
+                            Text(EventsModel.dateDisp(date: event.startDate))
+                            Spacer()
                         }
                         HStack {
                             Text(event.title)
+                            Spacer()
                         }
                     }
                 }

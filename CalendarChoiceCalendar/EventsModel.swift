@@ -28,4 +28,12 @@ class EventsModel: ObservableObject {
             }
         }
     }
+    
+    static func dateDisp(date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .medium
+        dateFormatter.locale = .current
+        return dateFormatter.string(from: date)
+    }
 }
