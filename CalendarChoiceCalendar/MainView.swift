@@ -14,12 +14,21 @@ struct MainView: View {
         NavigationView {
             List {
                 ForEach(self.eventsModel.events, id: \.self) { event in
-                    HStack {
-                        Text(event.title)
+                    VStack {
+                        HStack {
+                            Text(event.startDate.description)
+                        }
+                        HStack {
+                            Text(event.title)
+                        }
                     }
                 }
             }
-            .navigationTitle("Choice Calendar")
+            .navigationBarTitle("FC Barcelona", displayMode: .inline)
+            .onAppear() {
+                print("onApper")
+                self.eventsModel.updateEvents()
+            }
         }
     }
 }
