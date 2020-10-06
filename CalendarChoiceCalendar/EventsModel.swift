@@ -18,7 +18,7 @@ class EventsModel: ObservableObject {
     
     func updateEvents() {
         self.events = []
-        let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 60), calendars: nil)
+        let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: nil)
         eventStore.requestAccess(to: .event) { _,_ in
             let eventArray = self.eventStore.events(matching: predicate)
             for event in eventArray {
@@ -31,8 +31,8 @@ class EventsModel: ObservableObject {
     
     static func dateDisp(date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .medium
+        dateFormatter.dateStyle = .full
+        dateFormatter.timeStyle = .short
         dateFormatter.locale = .current
         return dateFormatter.string(from: date)
     }
