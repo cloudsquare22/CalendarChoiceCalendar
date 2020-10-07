@@ -16,7 +16,38 @@
 		8D543B842529DF7F00A64939 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D543B832529DF7F00A64939 /* MainView.swift */; };
 		8D543B882529E22300A64939 /* EventsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D543B872529E22300A64939 /* EventsModel.swift */; };
 		8D543B8E252CA13600A64939 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D543B90252CA13600A64939 /* Localizable.strings */; };
+		8D543B9B252D1A7900A64939 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D543B9A252D1A7900A64939 /* WidgetKit.framework */; };
+		8D543B9D252D1A7900A64939 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D543B9C252D1A7900A64939 /* SwiftUI.framework */; };
+		8D543BA0252D1A7900A64939 /* Choi_Cal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D543B9F252D1A7900A64939 /* Choi_Cal.swift */; };
+		8D543BA3252D1A7A00A64939 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D543BA2252D1A7A00A64939 /* Assets.xcassets */; };
+		8D543BA5252D1A7A00A64939 /* Choi_Cal.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8D543BA1252D1A7900A64939 /* Choi_Cal.intentdefinition */; };
+		8D543BA6252D1A7A00A64939 /* Choi_Cal.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8D543BA1252D1A7900A64939 /* Choi_Cal.intentdefinition */; };
+		8D543BA9252D1A7A00A64939 /* Choi-CalExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8D543B98252D1A7900A64939 /* Choi-CalExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8D543BA7252D1A7A00A64939 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D543B632529ACAC00A64939 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D543B97252D1A7900A64939;
+			remoteInfo = "Choi-CalExtension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8D543BAD252D1A7A00A64939 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8D543BA9252D1A7A00A64939 /* Choi-CalExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8D543B6B2529ACAC00A64939 /* CalendarChoiceCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarChoiceCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -31,6 +62,13 @@
 		8D543B872529E22300A64939 /* EventsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsModel.swift; sourceTree = "<group>"; };
 		8D543B8F252CA13600A64939 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		8D543B92252CA16E00A64939 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		8D543B98252D1A7900A64939 /* Choi-CalExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Choi-CalExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D543B9A252D1A7900A64939 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		8D543B9C252D1A7900A64939 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		8D543B9F252D1A7900A64939 /* Choi_Cal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choi_Cal.swift; sourceTree = "<group>"; };
+		8D543BA1252D1A7900A64939 /* Choi_Cal.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Choi_Cal.intentdefinition; sourceTree = "<group>"; };
+		8D543BA2252D1A7A00A64939 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8D543BA4252D1A7A00A64939 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +79,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8D543B95252D1A7900A64939 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D543B9D252D1A7900A64939 /* SwiftUI.framework in Frameworks */,
+				8D543B9B252D1A7900A64939 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -48,6 +95,8 @@
 			isa = PBXGroup;
 			children = (
 				8D543B6D2529ACAC00A64939 /* CalendarChoiceCalendar */,
+				8D543B9E252D1A7900A64939 /* Choi-Cal */,
+				8D543B99252D1A7900A64939 /* Frameworks */,
 				8D543B6C2529ACAC00A64939 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +105,7 @@
 			isa = PBXGroup;
 			children = (
 				8D543B6B2529ACAC00A64939 /* CalendarChoiceCalendar.app */,
+				8D543B98252D1A7900A64939 /* Choi-CalExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -85,6 +135,26 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		8D543B99252D1A7900A64939 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8D543B9A252D1A7900A64939 /* WidgetKit.framework */,
+				8D543B9C252D1A7900A64939 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8D543B9E252D1A7900A64939 /* Choi-Cal */ = {
+			isa = PBXGroup;
+			children = (
+				8D543B9F252D1A7900A64939 /* Choi_Cal.swift */,
+				8D543BA1252D1A7900A64939 /* Choi_Cal.intentdefinition */,
+				8D543BA2252D1A7A00A64939 /* Assets.xcassets */,
+				8D543BA4252D1A7A00A64939 /* Info.plist */,
+			);
+			path = "Choi-Cal";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -95,15 +165,34 @@
 				8D543B672529ACAC00A64939 /* Sources */,
 				8D543B682529ACAC00A64939 /* Frameworks */,
 				8D543B692529ACAC00A64939 /* Resources */,
+				8D543BAD252D1A7A00A64939 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8D543BA8252D1A7A00A64939 /* PBXTargetDependency */,
 			);
 			name = CalendarChoiceCalendar;
 			productName = CalendarChoiceCalendar;
 			productReference = 8D543B6B2529ACAC00A64939 /* CalendarChoiceCalendar.app */;
 			productType = "com.apple.product-type.application";
+		};
+		8D543B97252D1A7900A64939 /* Choi-CalExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8D543BAA252D1A7A00A64939 /* Build configuration list for PBXNativeTarget "Choi-CalExtension" */;
+			buildPhases = (
+				8D543B94252D1A7900A64939 /* Sources */,
+				8D543B95252D1A7900A64939 /* Frameworks */,
+				8D543B96252D1A7900A64939 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Choi-CalExtension";
+			productName = "Choi-CalExtension";
+			productReference = 8D543B98252D1A7900A64939 /* Choi-CalExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -115,6 +204,9 @@
 				LastUpgradeCheck = 1200;
 				TargetAttributes = {
 					8D543B6A2529ACAC00A64939 = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
+					8D543B97252D1A7900A64939 = {
 						CreatedOnToolsVersion = 12.0.1;
 					};
 				};
@@ -134,6 +226,7 @@
 			projectRoot = "";
 			targets = (
 				8D543B6A2529ACAC00A64939 /* CalendarChoiceCalendar */,
+				8D543B97252D1A7900A64939 /* Choi-CalExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -149,6 +242,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8D543B96252D1A7900A64939 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D543BA3252D1A7A00A64939 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -161,11 +262,29 @@
 				8D543B7B2529ACAD00A64939 /* CalendarChoiceCalendar.xcdatamodeld in Sources */,
 				8D543B842529DF7F00A64939 /* MainView.swift in Sources */,
 				8D543B882529E22300A64939 /* EventsModel.swift in Sources */,
+				8D543BA6252D1A7A00A64939 /* Choi_Cal.intentdefinition in Sources */,
 				8D543B6F2529ACAC00A64939 /* CalendarChoiceCalendarApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8D543B94252D1A7900A64939 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D543BA5252D1A7A00A64939 /* Choi_Cal.intentdefinition in Sources */,
+				8D543BA0252D1A7900A64939 /* Choi_Cal.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8D543BA8252D1A7A00A64939 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D543B97252D1A7900A64939 /* Choi-CalExtension */;
+			targetProxy = 8D543BA7252D1A7A00A64939 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8D543B90252CA13600A64939 /* Localizable.strings */ = {
@@ -301,6 +420,7 @@
 		8D543B802529ACAD00A64939 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -323,6 +443,7 @@
 		8D543B812529ACAD00A64939 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -337,6 +458,48 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.cloudsquare.ios.CalendarChoiceCalendar;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		8D543BAB252D1A7A00A64939 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 385NJ9XLA7;
+				INFOPLIST_FILE = "Choi-Cal/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.cloudsquare.ios.CalendarChoiceCalendar.Choi-Cal";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8D543BAC252D1A7A00A64939 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 385NJ9XLA7;
+				INFOPLIST_FILE = "Choi-Cal/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.cloudsquare.ios.CalendarChoiceCalendar.Choi-Cal";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -359,6 +522,15 @@
 			buildConfigurations = (
 				8D543B802529ACAD00A64939 /* Debug */,
 				8D543B812529ACAD00A64939 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8D543BAA252D1A7A00A64939 /* Build configuration list for PBXNativeTarget "Choi-CalExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D543BAB252D1A7A00A64939 /* Debug */,
+				8D543BAC252D1A7A00A64939 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

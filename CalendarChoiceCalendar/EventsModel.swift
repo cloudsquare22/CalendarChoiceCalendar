@@ -36,4 +36,5 @@ class EventsModel: ObservableObject {
         dateFormatter.locale = .current
         return dateFormatter.string(from: date)
     }
+
 }
