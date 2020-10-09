@@ -86,7 +86,7 @@ struct Choi_CalEntryView : View {
                     .font(.footnote)
             }
             Spacer()
-        }.padding(16)
+        }.padding(8)
     }
 }
 
@@ -108,10 +108,10 @@ struct Choi_Cal_Previews: PreviewProvider {
     static var previews: some View {
         Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
-        Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
-        Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .systemLarge))
+//        Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
+//            .previewContext(WidgetPreviewContext(family: .systemMedium))
+//        Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
+//            .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }
 
