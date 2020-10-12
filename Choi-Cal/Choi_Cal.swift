@@ -18,6 +18,8 @@ struct Provider: IntentTimelineProvider {
         let event = EventsModelWidget()
         event.startDate = eKEvent!.startDate
         event.title = eKEvent!.title
+        event.calenderTitle = eKEvent!.calendar.title
+        event.calendarColor = Color(eKEvent!.calendar.cgColor)
         return SimpleEntry(date: Date(), event: event, configuration: ConfigurationIntent())
     }
 
@@ -26,6 +28,8 @@ struct Provider: IntentTimelineProvider {
         let event = EventsModelWidget()
         event.startDate = eKEvent!.startDate
         event.title = eKEvent!.title
+        event.calenderTitle = eKEvent!.calendar.title
+        event.calendarColor = Color(eKEvent!.calendar.cgColor)
         let entry = SimpleEntry(date: Date(), event: event, configuration: configuration)
         completion(entry)
     }
@@ -41,6 +45,8 @@ struct Provider: IntentTimelineProvider {
             let event = EventsModelWidget()
             event.startDate = eKEvent!.startDate
             event.title = eKEvent!.title
+            event.calenderTitle = eKEvent!.calendar.title
+            event.calendarColor = Color(eKEvent!.calendar.cgColor)
             let entry = SimpleEntry(date: entryDate, event: event, configuration: configuration)
             entries.append(entry)
         }
@@ -75,18 +81,34 @@ struct Choi_CalEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        VStack {
-            Text("Calendar Title")
-                .font(.footnote)
-            Spacer()
+        GeometryReader { geometry in
             VStack(alignment: .leading) {
-                Text(entry.event.dispStartDate)
-                    .font(.footnote)
-                Text(entry.event.title)
-                    .font(.footnote)
+                HStack {
+                    Spacer()
+                    Text(entry.event.calenderTitle)
+                        .font(.footnote)
+                    Spacer()
+                }
+                RoundedRectangle(cornerRadius: 3, style: .circular)
+                    .fill(entry.event.calendarColor)
+                    .frame(width: geometry.size.width, height: 3, alignment: .center)
+                VStack(alignment: .leading, spacing: 8.0) {
+                    Text(entry.event.dispStartDate)
+                        .font(.footnote)
+                    Text(entry.event.title)
+                        .font(.footnote)
+                }
+//                HStack {
+//                    Spacer()
+//                    Text(entry.event.calenderTitle)
+//                        .foregroundColor(.gray)
+//                        .font(.custom("endline", size: 10.0))
+//                        .fontWeight(.light)
+//                    Spacer()
+//                }
             }
-            Spacer()
-        }.padding(8)
+        }
+        .padding(8)
     }
 }
 
@@ -118,11 +140,14 @@ struct Choi_Cal_Previews: PreviewProvider {
 class EventsModelWidget {
     var startDate: Date = Date()
     var title: String = "Title"
+    var calenderTitle: String = "Calendar Title"
+    var calendarColor: Color = .black
     
     var dispStartDate: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short
-        dateFormatter.timeStyle = .short
+        dateFormatter.dateFormat = "M/d H:mm〜"
+//        dateFormatter.dateStyle = .short
+//        dateFormatter.timeStyle = .short
         dateFormatter.locale = .current
         return dateFormatter.string(from: self.startDate)
     }
