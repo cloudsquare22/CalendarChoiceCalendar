@@ -14,22 +14,28 @@ struct Provider: IntentTimelineProvider {
     let eventStore = EKEventStore()
     
     func placeholder(in context: Context) -> SimpleEntry {
-        let eKEvent = getEvent()
+        let eKEvents = getEvents()
         let event = EventsModelWidget()
-        event.startDate = eKEvent!.startDate
-        event.title = eKEvent!.title
-        event.calenderTitle = eKEvent!.calendar.title
-        event.calendarColor = Color(eKEvent!.calendar.cgColor)
+        if eKEvents.count > 0 {
+            event.startDate = eKEvents[0].startDate
+            event.title = eKEvents[0].title
+            event.calenderTitle = eKEvents[0].calendar.title
+            event.calendarColor = Color(eKEvents[0].calendar.cgColor)
+        }
+        
         return SimpleEntry(date: Date(), event: event, configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let eKEvent = getEvent()
+        let eKEvents = getEvents()
         let event = EventsModelWidget()
-        event.startDate = eKEvent!.startDate
-        event.title = eKEvent!.title
-        event.calenderTitle = eKEvent!.calendar.title
-        event.calendarColor = Color(eKEvent!.calendar.cgColor)
+        if eKEvents.count > 0 {
+            event.startDate = eKEvents[0].startDate
+            event.title = eKEvents[0].title
+            event.calenderTitle = eKEvents[0].calendar.title
+            event.calendarColor = Color(eKEvents[0].calendar.cgColor)
+        }
+
         let entry = SimpleEntry(date: Date(), event: event, configuration: configuration)
         completion(entry)
     }
@@ -37,36 +43,33 @@ struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         var entries: [SimpleEntry] = []
 
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let eKEvent = getEvent()
-            let event = EventsModelWidget()
-            event.startDate = eKEvent!.startDate
-            event.title = eKEvent!.title
-            event.calenderTitle = eKEvent!.calendar.title
-            event.calendarColor = Color(eKEvent!.calendar.cgColor)
-            let entry = SimpleEntry(date: entryDate, event: event, configuration: configuration)
-            entries.append(entry)
+        let eKEvents = getEvents()
+        if eKEvents.count > 1 {
+            for index in 0...1 {
+                let event = EventsModelWidget()
+                event.startDate = eKEvents[index].startDate
+                event.title = eKEvents[index].title
+                event.calenderTitle = eKEvents[index].calendar.title
+                event.calendarColor = Color(eKEvents[index].calendar.cgColor)
+                let entry = SimpleEntry(date: event.startDate, event: event, configuration: configuration)
+                entries.append(entry)
+            }
         }
-
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
 
-    func getEvent() -> EKEvent? {
-        var result: EKEvent? = nil
-        let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: nil)
-//        eventStore.requestAccess(to: .event) { _,_ in
-            let eventArray = self.eventStore.events(matching: predicate)
-            for event in eventArray {
-                if event.calendar.title == "FC Barcelona" {
-                    result = event
-                    break
-                }
+    func getEvents() -> [EKEvent] {
+        let calendarAll = eventStore.calendars(for: .event)
+        var selectCalendars: [EKCalendar] = []
+        for calendar in calendarAll {
+            if calendar.title == "FC Barcelona" {
+                selectCalendars.append(calendar)
+                break
             }
-//        }
+        }
+        let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: selectCalendars)
+        let result = self.eventStore.events(matching: predicate)
         return result
     }
 }
@@ -139,8 +142,8 @@ struct Choi_Cal_Previews: PreviewProvider {
 
 class EventsModelWidget {
     var startDate: Date = Date()
-    var title: String = "Title"
-    var calenderTitle: String = "Calendar Title"
+    var title: String = "-"
+    var calenderTitle: String = "-"
     var calendarColor: Color = .black
     
     var dispStartDate: String {
