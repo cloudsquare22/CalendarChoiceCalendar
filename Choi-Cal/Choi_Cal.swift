@@ -47,11 +47,15 @@ struct Provider: IntentTimelineProvider {
         if eKEvents.count > 1 {
             for index in 0...1 {
                 let event = EventsModelWidget()
+                var date = Date()
+                if 0 < index {
+                   date = eKEvents[index - 1].startDate
+                }
                 event.startDate = eKEvents[index].startDate
                 event.title = eKEvents[index].title
                 event.calenderTitle = eKEvents[index].calendar.title
                 event.calendarColor = Color(eKEvents[index].calendar.cgColor)
-                let entry = SimpleEntry(date: event.startDate, event: event, configuration: configuration)
+                let entry = SimpleEntry(date: date, event: event, configuration: configuration)
                 entries.append(entry)
             }
         }
