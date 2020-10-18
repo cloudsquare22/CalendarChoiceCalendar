@@ -13,8 +13,17 @@ struct MainView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(self.eventsModel.events, id: \.self) { event in
+                ForEach(self.eventsModel.nextEvents, id: \.self) { event in
                     VStack {
+                        HStack {
+                            if event.calendar != nil {
+                                Text(event.calendar.title)
+                            }
+                            else {
+                                Text("-")
+                            }
+                            Spacer()
+                        }
                         HStack {
                             Text(EventsModel.dateDisp(date: event.startDate))
                             Spacer()
@@ -26,10 +35,14 @@ struct MainView: View {
                     }
                 }
             }
-            .navigationBarTitle("FC Barcelona", displayMode: .inline)
+//            .navigationBarItems(trailing: Button("llala", action: {
+//                print("update")
+//                self.eventsModel.updateNextEvents()
+//            }))
+            .navigationBarTitle("Next Evens", displayMode: .inline)
             .onAppear() {
                 print("onApper")
-                self.eventsModel.updateEvents()
+                self.eventsModel.updateNextEvents()
             }
         }
     }
