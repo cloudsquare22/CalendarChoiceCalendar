@@ -9,41 +9,89 @@ import SwiftUI
 
 struct MainView: View {
     @EnvironmentObject var eventsModel: EventsModel
+    @State var calendarsOn: [Bool] = []
     
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(self.eventsModel.nextEvents, id: \.self) { event in
-                    VStack {
-                        HStack {
-                            if event.calendar != nil {
+        TabView {
+            NavigationView {
+                List {
+                    ForEach(self.eventsModel.nextEvents) { event in
+                        VStack {
+                            HStack {
                                 Text(event.calendar.title)
+                                    .foregroundColor(Color(event.calendar.cgColor))
+                                Spacer()
                             }
-                            else {
-                                Text("-")
+                            HStack {
+                                if event.eventTitle != "" {
+                                    Text(EventsModel.dateDisp(date: event.startDate))
+                                }
+                                else {
+                                    Text("-")
+                                }
+                                Spacer()
                             }
-                            Spacer()
-                        }
-                        HStack {
-                            Text(EventsModel.dateDisp(date: event.startDate))
-                            Spacer()
-                        }
-                        HStack {
-                            Text(event.title)
-                            Spacer()
+                            HStack {
+                                if event.eventTitle != "" {
+                                    Text(event.eventTitle)
+                                }
+                                else {
+                                    Text("No event.")
+                                }
+                                Spacer()
+                            }
                         }
                     }
                 }
+                .navigationBarTitle("Next Events", displayMode: .inline)
+                .onAppear() {
+                    print("onAppear() Next Events")
+                    self.eventsModel.updateNextEvents()
+                }
+                .onDisappear() {
+                    print("onDisappear() Next Events")
+                }
             }
-//            .navigationBarItems(trailing: Button("llala", action: {
-//                print("update")
-//                self.eventsModel.updateNextEvents()
-//            }))
-            .navigationBarTitle("Next Evens", displayMode: .inline)
-            .onAppear() {
-                print("onApper")
-                self.eventsModel.updateNextEvents()
+            .tabItem {
+                Text("Next Events")
             }
+            NavigationView {
+                List {
+                    ForEach(self.eventsModel.calendars) { calendar in
+                        HStack {
+                            Text(calendar.calendar.title)
+                                .foregroundColor(Color(calendar.calendar.cgColor))
+                            Spacer()
+                            Toggle(isOn: $calendarsOn[calendar.index], label: {
+                                Text("Label")
+                            })
+                            .labelsHidden()
+                        }
+                    }
+                }
+                .navigationBarTitle("Calendars", displayMode: .inline)
+                .onAppear() {
+                    print("onAppear() Calendars")
+                    self.eventsModel.updateCalendars()
+                    for calendar in self.eventsModel.calendars {
+                        self.calendarsOn.append(calendar.isOn)
+                    }
+                }
+                .onDisappear() {
+                    print("onDisappear() Calendars")
+                }
+                .onChange(of: self.calendarsOn, perform: { value in
+                    print("Change")
+                    self.eventsModel.updateCalndarsIsOn(isOns: self.calendarsOn)
+                })
+            }
+            .tabItem {
+                Text("Calendars")
+            }
+            Text("Setting")
+                .tabItem {
+                    Text("Setting")
+                }
         }
     }
 }
