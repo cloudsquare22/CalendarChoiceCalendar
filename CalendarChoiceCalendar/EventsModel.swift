@@ -71,9 +71,9 @@ class EventsModel: ObservableObject {
     }
     
     func updateCalndarsIsOn(isOns: [Bool]) {
-        for index in 0..<isOns.count {
-            self.calendars[index].isOn = isOns[index]
-        }
+//        for index in 0..<isOns.count {
+//            self.calendars[index].isOn = isOns[index]
+//        }
         print(self.calendars)
     }
     

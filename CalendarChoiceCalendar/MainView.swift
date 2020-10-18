@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MainView: View {
     @EnvironmentObject var eventsModel: EventsModel
-    @State var calendarsOn: [Bool] = []
     
     var body: some View {
         TabView {
@@ -62,7 +61,7 @@ struct MainView: View {
                             Text(calendar.calendar.title)
                                 .foregroundColor(Color(calendar.calendar.cgColor))
                             Spacer()
-                            Toggle(isOn: $calendarsOn[calendar.index], label: {
+                            Toggle(isOn: $eventsModel.calendars[calendar.index].isOn, label: {
                                 Text("Label")
                             })
                             .labelsHidden()
@@ -73,17 +72,14 @@ struct MainView: View {
                 .onAppear() {
                     print("onAppear() Calendars")
                     self.eventsModel.updateCalendars()
-                    for calendar in self.eventsModel.calendars {
-                        self.calendarsOn.append(calendar.isOn)
-                    }
                 }
                 .onDisappear() {
                     print("onDisappear() Calendars")
                 }
-                .onChange(of: self.calendarsOn, perform: { value in
-                    print("Change")
-                    self.eventsModel.updateCalndarsIsOn(isOns: self.calendarsOn)
-                })
+//                .onChange(of: self.calendarsOn, perform: { value in
+//                    print("Change")
+//                    self.eventsModel.updateCalndarsIsOn(isOns: self.calendarsOn)
+//                })
             }
             .tabItem {
                 Text("Calendars")
