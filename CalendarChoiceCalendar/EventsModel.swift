@@ -15,17 +15,24 @@ class EventsModel: ObservableObject {
     @Published var calendars: [CalendarDispModel] = []
     
     init() {
+        self.updateNextEvents()
     }
     
     func updateNextEvents() {
         self.nextEvents = []
+        self.calendars = []
         let eventStore = EKEventStore()
-        eventStore.requestAccess(to: .event) { _,_ in
+//        eventStore.requestAccess(to: .event) { _,_ in
             var calendars = eventStore.calendars(for: .event)
             calendars.sort() { (a,b) in
                 a.title < b.title
             }
+            var index = 0
             for calendar in calendars {
+                let calendarDisp = CalendarDispModel(index: index, calendar: calendar, isOn: true)
+                self.calendars.append(calendarDisp)
+                index = index + 1
+
                 let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: [calendar])
                 let events = eventStore.events(matching: predicate)
                 if 0 < events.count {
@@ -36,9 +43,9 @@ class EventsModel: ObservableObject {
                     let event = EventDispModel(startDate: Date(), eventTitle: "", calendar: calendar)
                     self.nextEvents.append(event)
                 }
-//                print(calendar)
+                print(calendar)
             }
-        }
+//        }
     }
     
     func updateEvents() {

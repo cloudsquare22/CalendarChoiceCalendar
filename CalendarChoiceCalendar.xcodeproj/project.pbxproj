@@ -23,6 +23,9 @@
 		8D543BA5252D1A7A00A64939 /* Choi_Cal.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8D543BA1252D1A7900A64939 /* Choi_Cal.intentdefinition */; };
 		8D543BA6252D1A7A00A64939 /* Choi_Cal.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8D543BA1252D1A7900A64939 /* Choi_Cal.intentdefinition */; };
 		8D543BA9252D1A7A00A64939 /* Choi-CalExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8D543B98252D1A7900A64939 /* Choi-CalExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8D91C4D1253CEEEA006ABF39 /* NextEventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91C4D0253CEEE9006ABF39 /* NextEventData.swift */; };
+		8D91C4D5253DBC54006ABF39 /* NextEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91C4D4253DBC54006ABF39 /* NextEventView.swift */; };
+		8D91C4D9253DBF2E006ABF39 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91C4D8253DBF2E006ABF39 /* CalendarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +72,9 @@
 		8D543BA1252D1A7900A64939 /* Choi_Cal.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Choi_Cal.intentdefinition; sourceTree = "<group>"; };
 		8D543BA2252D1A7A00A64939 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8D543BA4252D1A7A00A64939 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D91C4D0253CEEE9006ABF39 /* NextEventData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextEventData.swift; sourceTree = "<group>"; };
+		8D91C4D4253DBC54006ABF39 /* NextEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextEventView.swift; sourceTree = "<group>"; };
+		8D91C4D8253DBF2E006ABF39 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +129,9 @@
 				8D543B832529DF7F00A64939 /* MainView.swift */,
 				8D543B872529E22300A64939 /* EventsModel.swift */,
 				8D543B90252CA13600A64939 /* Localizable.strings */,
+				8D91C4D0253CEEE9006ABF39 /* NextEventData.swift */,
+				8D91C4D4253DBC54006ABF39 /* NextEventView.swift */,
+				8D91C4D8253DBF2E006ABF39 /* CalendarView.swift */,
 			);
 			path = CalendarChoiceCalendar;
 			sourceTree = "<group>";
@@ -257,7 +266,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D91C4D9253DBF2E006ABF39 /* CalendarView.swift in Sources */,
 				8D543B782529ACAD00A64939 /* Persistence.swift in Sources */,
+				8D91C4D1253CEEEA006ABF39 /* NextEventData.swift in Sources */,
+				8D91C4D5253DBC54006ABF39 /* NextEventView.swift in Sources */,
 				8D543B712529ACAC00A64939 /* ContentView.swift in Sources */,
 				8D543B7B2529ACAD00A64939 /* CalendarChoiceCalendar.xcdatamodeld in Sources */,
 				8D543B842529DF7F00A64939 /* MainView.swift in Sources */,

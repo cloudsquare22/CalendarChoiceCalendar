@@ -12,80 +12,19 @@ struct MainView: View {
     
     var body: some View {
         TabView {
-            NavigationView {
-                List {
-                    ForEach(self.eventsModel.nextEvents) { event in
-                        VStack {
-                            HStack {
-                                Text(event.calendar.title)
-                                    .foregroundColor(Color(event.calendar.cgColor))
-                                Spacer()
-                            }
-                            HStack {
-                                if event.eventTitle != "" {
-                                    Text(EventsModel.dateDisp(date: event.startDate))
-                                }
-                                else {
-                                    Text("-")
-                                }
-                                Spacer()
-                            }
-                            HStack {
-                                if event.eventTitle != "" {
-                                    Text(event.eventTitle)
-                                }
-                                else {
-                                    Text("No event.")
-                                }
-                                Spacer()
-                            }
-                        }
-                    }
+            NextEventView()
+                .tabItem {
+                    Image(systemName: "deskclock")
+                    Text("Next Event")
                 }
-                .navigationBarTitle("Next Events", displayMode: .inline)
-                .onAppear() {
-                    print("onAppear() Next Events")
-                    self.eventsModel.updateNextEvents()
+            CalendarView()
+                .tabItem {
+                    Image(systemName: "calendar")
+                    Text("Calendar")
                 }
-                .onDisappear() {
-                    print("onDisappear() Next Events")
-                }
-            }
-            .tabItem {
-                Text("Next Events")
-            }
-            NavigationView {
-                List {
-                    ForEach(self.eventsModel.calendars) { calendar in
-                        HStack {
-                            Text(calendar.calendar.title)
-                                .foregroundColor(Color(calendar.calendar.cgColor))
-                            Spacer()
-                            Toggle(isOn: $eventsModel.calendars[calendar.index].isOn, label: {
-                                Text("Label")
-                            })
-                            .labelsHidden()
-                        }
-                    }
-                }
-                .navigationBarTitle("Calendars", displayMode: .inline)
-                .onAppear() {
-                    print("onAppear() Calendars")
-                    self.eventsModel.updateCalendars()
-                }
-                .onDisappear() {
-                    print("onDisappear() Calendars")
-                }
-//                .onChange(of: self.calendarsOn, perform: { value in
-//                    print("Change")
-//                    self.eventsModel.updateCalndarsIsOn(isOns: self.calendarsOn)
-//                })
-            }
-            .tabItem {
-                Text("Calendars")
-            }
             Text("Setting")
                 .tabItem {
+                    Image(systemName: "gear")
                     Text("Setting")
                 }
         }
