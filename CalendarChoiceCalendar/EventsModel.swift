@@ -12,7 +12,6 @@ class EventsModel: ObservableObject {
     
     @Published var events: [EKEvent] = []
     @Published var nextEvents: [EventDispModel] = []
-    @Published var calendars: [CalendarDispModel] = []
     
     init() {
         self.updateNextEvents()
@@ -20,7 +19,6 @@ class EventsModel: ObservableObject {
     
     func updateNextEvents() {
         self.nextEvents = []
-        self.calendars = []
         let eventStore = EKEventStore()
 //        eventStore.requestAccess(to: .event) { _,_ in
             var calendars = eventStore.calendars(for: .event)
@@ -29,20 +27,18 @@ class EventsModel: ObservableObject {
             }
             var index = 0
             for calendar in calendars {
-                let calendarDisp = CalendarDispModel(index: index, calendar: calendar, isOn: true)
-                self.calendars.append(calendarDisp)
-                index = index + 1
 
                 let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: [calendar])
                 let events = eventStore.events(matching: predicate)
                 if 0 < events.count {
-                    let event = EventDispModel(startDate: events[0].startDate, eventTitle: events[0].title, calendar: calendar)
+                    let event = EventDispModel(index: index, startDate: events[0].startDate, eventTitle: events[0].title, calendar: calendar, isOn: true)
                     self.nextEvents.append(event)
                 }
                 else {
-                    let event = EventDispModel(startDate: Date(), eventTitle: "", calendar: calendar)
+                    let event = EventDispModel(index: index, startDate: Date(), eventTitle: "", calendar: calendar, isOn: true)
                     self.nextEvents.append(event)
                 }
+                index = index + 1
                 print(calendar)
             }
 //        }
@@ -62,28 +58,6 @@ class EventsModel: ObservableObject {
         }
     }
     
-    func updateCalendars() {
-        self.calendars = []
-        let eventStore = EKEventStore()
-        var calendars = eventStore.calendars(for: .event)
-        calendars.sort() { (a,b) in
-            a.title < b.title
-        }
-        var index = 0
-        for calendar in calendars {
-            let calendarDisp = CalendarDispModel(index: index, calendar: calendar, isOn: true)
-            self.calendars.append(calendarDisp)
-            index = index + 1
-        }
-    }
-    
-    func updateCalndarsIsOn(isOns: [Bool]) {
-//        for index in 0..<isOns.count {
-//            self.calendars[index].isOn = isOns[index]
-//        }
-        print(self.calendars)
-    }
-    
     static func dateDisp(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .full
@@ -96,14 +70,9 @@ class EventsModel: ObservableObject {
 
 struct EventDispModel: Identifiable {
     let id: UUID = UUID()
+    let index: Int
     let startDate: Date
     let eventTitle: String
-    let calendar: EKCalendar
-}
-
-struct CalendarDispModel: Identifiable {
-    let id: UUID = UUID()
-    let index: Int
     let calendar: EKCalendar
     var isOn: Bool
 }

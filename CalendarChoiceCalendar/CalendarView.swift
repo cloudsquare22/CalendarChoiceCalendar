@@ -13,16 +13,19 @@ struct CalendarView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(self.eventsModel.calendars) { calendar in
+                ForEach(self.eventsModel.nextEvents) { nextEvent in
                     HStack {
-                        Text(calendar.calendar.title)
-                            .foregroundColor(Color(calendar.calendar.cgColor))
+                        Text(nextEvent.calendar.title)
+                            .foregroundColor(Color(nextEvent.calendar.cgColor))
                         Spacer()
-                        Toggle(isOn: $eventsModel.calendars[calendar.index].isOn, label: {
+                        Toggle(isOn: $eventsModel.nextEvents[nextEvent.index].isOn, label: {
                             Text("Label")
                         })
                         .labelsHidden()
                     }
+                    .onChange(of: eventsModel.nextEvents[nextEvent.index].isOn, perform: { value in
+                        print("isOn Change:\(value)")
+                    })
                 }
             }
             .navigationBarTitle("Calendar", displayMode: .inline)
