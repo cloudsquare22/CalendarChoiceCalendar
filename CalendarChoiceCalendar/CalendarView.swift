@@ -24,7 +24,8 @@ struct CalendarView: View {
                         .labelsHidden()
                     }
                     .onChange(of: eventsModel.nextEvents[nextEvent.index].isOn, perform: { value in
-                        print("isOn Change:\(value)")
+                        print("isOn Change:\(value) \(eventsModel.nextEvents[nextEvent.index].calendar.title)")
+                        self.eventsModel.updateOffCalendar()
                     })
                 }
             }

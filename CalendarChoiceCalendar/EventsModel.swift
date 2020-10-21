@@ -12,12 +12,17 @@ class EventsModel: ObservableObject {
     
     @Published var events: [EKEvent] = []
     @Published var nextEvents: [EventDispModel] = []
+    var offCalendar: [String] = []
     
     init() {
         self.updateNextEvents()
     }
     
     func updateNextEvents() {
+        if let offs = UserDefaults.standard.stringArray(forKey: "offCalendar") {
+            offCalendar = offs
+        }
+        
         self.nextEvents = []
         let eventStore = EKEventStore()
 //        eventStore.requestAccess(to: .event) { _,_ in
@@ -27,21 +32,34 @@ class EventsModel: ObservableObject {
             }
             var index = 0
             for calendar in calendars {
-
+                var isOn = true
+                if offCalendar.contains(calendar.title) {
+                    isOn = false
+                }
                 let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: [calendar])
                 let events = eventStore.events(matching: predicate)
                 if 0 < events.count {
-                    let event = EventDispModel(index: index, startDate: events[0].startDate, eventTitle: events[0].title, calendar: calendar, isOn: true)
+                    let event = EventDispModel(index: index, startDate: events[0].startDate, eventTitle: events[0].title, calendar: calendar, isOn: isOn)
                     self.nextEvents.append(event)
                 }
                 else {
-                    let event = EventDispModel(index: index, startDate: Date(), eventTitle: "", calendar: calendar, isOn: true)
+                    let event = EventDispModel(index: index, startDate: Date(), eventTitle: "", calendar: calendar, isOn: isOn)
                     self.nextEvents.append(event)
                 }
                 index = index + 1
                 print(calendar)
             }
 //        }
+    }
+    
+    func updateOffCalendar() {
+        offCalendar = []
+        for event in nextEvents {
+            if event.isOn == false {
+                offCalendar.append(event.calendar.title)
+            }
+        }
+        UserDefaults.standard.setValue(offCalendar, forKey: "offCalendar")
     }
     
     func updateEvents() {
