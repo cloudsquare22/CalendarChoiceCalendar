@@ -16,12 +16,19 @@ class EventsModel: ObservableObject {
     let eventStore = EKEventStore()
     
     init() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(EventsModel.changeEvent(_:)), name: NSNotification.Name.EKEventStoreChanged, object: eventStore)
         eventStore.requestAccess(to: .event) { (access, _) in
             print("EKEventStore requestAccess: \(access)")
         }
         self.updateNextEvents()
     }
     
+    @objc func changeEvent(_ notification:Notification?) {
+        print(#function)
+        self.updateNextEvents()
+    }
+
     func updateNextEvents() {
         if let offs = UserDefaults.standard.stringArray(forKey: "offCalendar") {
             offCalendar = offs
