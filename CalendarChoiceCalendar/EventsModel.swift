@@ -12,6 +12,7 @@ class EventsModel: ObservableObject {
     
     @Published var events: [EKEvent] = []
     @Published var nextEvents: [EventDispModel] = []
+    @Published var calendarEventList: [EventDispModel] = []
     var offCalendar: [String] = []
     let eventStore = EKEventStore()
     
@@ -71,6 +72,16 @@ class EventsModel: ObservableObject {
         UserDefaults.standard.setValue(offCalendar, forKey: "offCalendar")
     }
     
+    func getEventList(calendar: EKCalendar) {
+        calendarEventList = []
+        let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: [calendar])
+        let events = eventStore.events(matching: predicate)
+        for event in events {
+            let eventDispModel = EventDispModel(startDate: event.startDate, eventTitle: event.title, calendar: calendar, isOn: true)
+            calendarEventList.append(eventDispModel)
+        }
+    }
+    
     static func dateDisp(date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .full
@@ -83,7 +94,7 @@ class EventsModel: ObservableObject {
 
 struct EventDispModel: Identifiable {
     let id: UUID = UUID()
-    let index: Int
+    var index: Int = 0
     let startDate: Date
     let eventTitle: String
     let calendar: EKCalendar

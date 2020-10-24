@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D25D248254447F200E9ACDD /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D25D247254447F200E9ACDD /* EventListView.swift */; };
 		8D543B6F2529ACAC00A64939 /* CalendarChoiceCalendarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D543B6E2529ACAC00A64939 /* CalendarChoiceCalendarApp.swift */; };
 		8D543B712529ACAC00A64939 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D543B702529ACAC00A64939 /* ContentView.swift */; };
 		8D543B732529ACAD00A64939 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D543B722529ACAD00A64939 /* Assets.xcassets */; };
@@ -53,6 +54,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8D25D247254447F200E9ACDD /* EventListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
 		8D543B6B2529ACAC00A64939 /* CalendarChoiceCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CalendarChoiceCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D543B6E2529ACAC00A64939 /* CalendarChoiceCalendarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarChoiceCalendarApp.swift; sourceTree = "<group>"; };
 		8D543B702529ACAC00A64939 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				8D91C4D0253CEEE9006ABF39 /* NextEventData.swift */,
 				8D91C4D4253DBC54006ABF39 /* NextEventView.swift */,
 				8D91C4D8253DBF2E006ABF39 /* CalendarView.swift */,
+				8D25D247254447F200E9ACDD /* EventListView.swift */,
 			);
 			path = CalendarChoiceCalendar;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D25D248254447F200E9ACDD /* EventListView.swift in Sources */,
 				8D91C4D9253DBF2E006ABF39 /* CalendarView.swift in Sources */,
 				8D543B782529ACAD00A64939 /* Persistence.swift in Sources */,
 				8D91C4D1253CEEEA006ABF39 /* NextEventData.swift in Sources */,

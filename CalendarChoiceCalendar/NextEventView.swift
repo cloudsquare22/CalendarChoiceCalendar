@@ -15,29 +15,32 @@ struct NextEventView: View {
             List {
                 ForEach(self.eventsModel.nextEvents) { event in
                     if event.isOn == true {
-                        VStack {
-                            HStack {
-                                Text(event.calendar.title)
-                                    .foregroundColor(Color(event.calendar.cgColor))
-                                Spacer()
-                            }
-                            HStack {
-                                if event.eventTitle != "" {
-                                    Text(EventsModel.dateDisp(date: event.startDate))
+                        NavigationLink(
+                            destination: EventListView(title: event.calendar.title)) {
+                            VStack {
+                                HStack {
+                                    Text(event.calendar.title)
+                                        .foregroundColor(Color(event.calendar.cgColor))
+                                    Spacer()
                                 }
-                                else {
-                                    Text("-")
+                                HStack {
+                                    if event.eventTitle != "" {
+                                        Text(EventsModel.dateDisp(date: event.startDate))
+                                    }
+                                    else {
+                                        Text("-")
+                                    }
+                                    Spacer()
                                 }
-                                Spacer()
-                            }
-                            HStack {
-                                if event.eventTitle != "" {
-                                    Text(event.eventTitle)
+                                HStack {
+                                    if event.eventTitle != "" {
+                                        Text(event.eventTitle)
+                                    }
+                                    else {
+                                        Text("No event.")
+                                    }
+                                    Spacer()
                                 }
-                                else {
-                                    Text("No event.")
-                                }
-                                Spacer()
                             }
                         }
                     }
