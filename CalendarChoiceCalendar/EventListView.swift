@@ -8,48 +8,41 @@
 import SwiftUI
 
 struct EventListView: View {
-    @EnvironmentObject var eventsModel: EventsModel
+    @State var eventList: [EventDispModel]
     let title: String
 
     var body: some View {
-        NavigationView {
-            List {
-                ForEach(self.eventsModel.calendarEventList) { event in
-                    VStack {
-                        HStack {
-                            Text(event.calendar.title)
-                                .foregroundColor(Color(event.calendar.cgColor))
-                            Spacer()
+        List {
+            ForEach(self.eventList) { event in
+                VStack {
+                    HStack {
+                        if event.eventTitle != "" {
+                            Text(EventsModel.dateDisp(date: event.startDate))
                         }
-                        HStack {
-                            if event.eventTitle != "" {
-                                Text(EventsModel.dateDisp(date: event.startDate))
-                            }
-                            else {
-                                Text("-")
-                            }
-                            Spacer()
+                        else {
+                            Text("-")
                         }
-                        HStack {
-                            if event.eventTitle != "" {
-                                Text(event.eventTitle)
-                            }
-                            else {
-                                Text("No event.")
-                            }
-                            Spacer()
+                        Spacer()
+                    }
+                    HStack {
+                        if event.eventTitle != "" {
+                            Text(event.eventTitle)
                         }
+                        else {
+                            Text("No event.")
+                        }
+                        Spacer()
                     }
                 }
             }
-            .navigationBarTitle(title, displayMode: .inline)
         }
+        .padding(8)
+        .navigationBarTitle(title, displayMode: .inline)
     }
 }
 
 struct EventListView_Previews: PreviewProvider {
     static var previews: some View {
-        EventListView(title: "Calendar")
-            .environmentObject(EventsModel())
+        EventListView(eventList: [], title: "Calendar")
     }
 }

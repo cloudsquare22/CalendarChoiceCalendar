@@ -72,14 +72,15 @@ class EventsModel: ObservableObject {
         UserDefaults.standard.setValue(offCalendar, forKey: "offCalendar")
     }
     
-    func getEventList(calendar: EKCalendar) {
-        calendarEventList = []
+    func getEventList(calendar: EKCalendar) -> [EventDispModel] {
+        var eventList: [EventDispModel] = []
         let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: [calendar])
         let events = eventStore.events(matching: predicate)
         for event in events {
             let eventDispModel = EventDispModel(startDate: event.startDate, eventTitle: event.title, calendar: calendar, isOn: true)
-            calendarEventList.append(eventDispModel)
+            eventList.append(eventDispModel)
         }
+        return eventList
     }
     
     static func dateDisp(date: Date) -> String {

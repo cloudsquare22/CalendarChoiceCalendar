@@ -16,7 +16,7 @@ struct NextEventView: View {
                 ForEach(self.eventsModel.nextEvents) { event in
                     if event.isOn == true {
                         NavigationLink(
-                            destination: EventListView(title: event.calendar.title)) {
+                            destination: EventListView(eventList: self.eventsModel.getEventList(calendar: event.calendar), title: event.calendar.title)) {
                             VStack {
                                 HStack {
                                     Text(event.calendar.title)
@@ -46,7 +46,8 @@ struct NextEventView: View {
                     }
                 }
             }
-            .navigationBarTitle("Next Event", displayMode: .inline)
+            .padding(8)
+            .navigationBarTitle("Next", displayMode: .inline)
             .navigationBarItems(trailing: Image(systemName: "arrow.counterclockwise")
                                     .foregroundColor(.blue)
                                     .onTapGesture {
