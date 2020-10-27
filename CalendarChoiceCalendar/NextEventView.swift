@@ -47,7 +47,7 @@ struct NextEventView: View {
                 }
             }
             .padding(8)
-            .navigationBarTitle("Next", displayMode: .inline)
+            .navigationBarTitle("Next Event", displayMode: .inline)
             .navigationBarItems(trailing: Image(systemName: "arrow.counterclockwise")
                                     .foregroundColor(.blue)
                                     .onTapGesture {

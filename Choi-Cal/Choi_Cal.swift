@@ -14,11 +14,13 @@ struct Provider: IntentTimelineProvider {
     let eventStore = EKEventStore()
     
     func placeholder(in context: Context) -> SimpleEntry {
+        print(#function)
         let eKEvents = getEvents()
         let event = EventsModelWidget()
         if eKEvents.count > 0 {
             event.startDate = eKEvents[0].startDate
-            event.title = eKEvents[0].title
+//            event.title = eKEvents[0].title
+            event.title = #function
             event.calenderTitle = eKEvents[0].calendar.title
             event.calendarColor = Color(eKEvents[0].calendar.cgColor)
         }
@@ -31,7 +33,8 @@ struct Provider: IntentTimelineProvider {
         let event = EventsModelWidget()
         if eKEvents.count > 0 {
             event.startDate = eKEvents[0].startDate
-            event.title = eKEvents[0].title
+//            event.title = eKEvents[0].title
+            event.title = #function
             event.calenderTitle = eKEvents[0].calendar.title
             event.calendarColor = Color(eKEvents[0].calendar.cgColor)
         }
@@ -41,6 +44,7 @@ struct Provider: IntentTimelineProvider {
     }
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+        print(#function)
         var entries: [SimpleEntry] = []
 
         let eKEvents = getEvents()
@@ -59,6 +63,7 @@ struct Provider: IntentTimelineProvider {
                 entries.append(entry)
             }
         }
+        print(entries)
         let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
@@ -103,6 +108,8 @@ struct Choi_CalEntryView : View {
                     Text(entry.event.dispStartDate)
                         .font(.footnote)
                     Text(entry.event.title)
+                        .font(.footnote)
+                    Text(entry.event.startDate, style: .timer)
                         .font(.footnote)
                 }
 //                HStack {
