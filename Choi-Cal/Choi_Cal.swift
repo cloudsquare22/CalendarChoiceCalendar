@@ -15,16 +15,11 @@ struct Provider: IntentTimelineProvider {
     
     func placeholder(in context: Context) -> SimpleEntry {
         print(#function)
-        let eKEvents = getEvents()
         let event = EventsModelWidget()
-        if eKEvents.count > 0 {
-            event.startDate = eKEvents[0].startDate
-//            event.title = eKEvents[0].title
-            event.title = #function
-            event.calenderTitle = eKEvents[0].calendar.title
-            event.calendarColor = Color(eKEvents[0].calendar.cgColor)
-        }
-        
+        event.startDate = Date()
+        event.title = "Event xxx"
+        event.calenderTitle = "Calendar xxx"
+        event.calendarColor = .green
         return SimpleEntry(date: Date(), event: event, configuration: ConfigurationIntent())
     }
 
@@ -48,23 +43,20 @@ struct Provider: IntentTimelineProvider {
         var entries: [SimpleEntry] = []
 
         let eKEvents = getEvents()
-        if eKEvents.count > 1 {
-            for index in 0...1 {
-                let event = EventsModelWidget()
-                var date = Date()
-                if 0 < index {
-                   date = eKEvents[index - 1].startDate
-                }
-                event.startDate = eKEvents[index].startDate
-                event.title = eKEvents[index].title
-                event.calenderTitle = eKEvents[index].calendar.title
-                event.calendarColor = Color(eKEvents[index].calendar.cgColor)
-                let entry = SimpleEntry(date: date, event: event, configuration: configuration)
-                entries.append(entry)
-            }
+        var nextDate = Date()
+        if eKEvents.count > 0 {
+            let event = EventsModelWidget()
+            event.startDate = eKEvents[0].startDate
+            event.title = eKEvents[0].title
+            event.calenderTitle = eKEvents[0].calendar.title
+            event.calendarColor = Color(eKEvents[0].calendar.cgColor)
+            let entry = SimpleEntry(date: Date(), event: event, configuration: configuration)
+            entries.append(entry)
+            nextDate = eKEvents[0].startDate
         }
         print(entries)
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+        print(nextDate)
+        let timeline = Timeline(entries: entries, policy: .after(nextDate))
         completion(timeline)
     }
 
