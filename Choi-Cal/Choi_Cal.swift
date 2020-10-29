@@ -43,8 +43,7 @@ struct Provider: IntentTimelineProvider {
         var entries: [SimpleEntry] = []
 
         let eKEvents = getEvents()
-        var nextDate = Date()
-        if eKEvents.count > 0 {
+        if eKEvents.count > 1 {
             let event = EventsModelWidget()
             event.startDate = eKEvents[0].startDate
             event.title = eKEvents[0].title
@@ -52,11 +51,18 @@ struct Provider: IntentTimelineProvider {
             event.calendarColor = Color(eKEvents[0].calendar.cgColor)
             let entry = SimpleEntry(date: Date(), event: event, configuration: configuration)
             entries.append(entry)
-            nextDate = eKEvents[0].startDate
+
+            let eventNext = EventsModelWidget()
+            eventNext.startDate = eKEvents[1].startDate
+            eventNext.title = eKEvents[1].title
+            eventNext.calenderTitle = eKEvents[1].calendar.title
+            eventNext.calendarColor = Color(eKEvents[1].calendar.cgColor)
+            let entryNext = SimpleEntry(date: eKEvents[0].startDate, event: event, configuration: configuration)
+            entries.append(entryNext)
         }
         print(entries)
-        print(nextDate)
-        let timeline = Timeline(entries: entries, policy: .after(nextDate))
+//        print(nextDate)
+        let timeline = Timeline(entries: entries, policy: .atEnd)
         completion(timeline)
     }
 
