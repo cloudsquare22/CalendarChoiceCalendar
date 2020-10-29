@@ -7,6 +7,7 @@
 
 import SwiftUI
 import EventKit
+import WidgetKit
 
 class EventsModel: ObservableObject {
     
@@ -28,6 +29,7 @@ class EventsModel: ObservableObject {
     @objc func changeEvent(_ notification:Notification?) {
         print(#function)
         self.updateNextEvents()
+        WidgetCenter.shared.reloadAllTimelines()
     }
 
     func updateNextEvents() {

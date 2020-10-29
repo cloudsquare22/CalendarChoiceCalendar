@@ -126,14 +126,15 @@ struct Choi_CalEntryView : View {
 
 @main
 struct Choi_Cal: Widget {
-    let kind: String = "Choi_Cal"
+    let kind: String = "jp.cloudsquare.ios.CalendarChoiceCalendar.widget"
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
             Choi_CalEntryView(entry: entry)
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("neCal")
+        .description("Next Calendar Configuration.")
+        .supportedFamilies([.systemSmall])
     }
 }
 
