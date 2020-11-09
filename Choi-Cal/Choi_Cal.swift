@@ -40,9 +40,12 @@ struct Provider: IntentTimelineProvider {
 
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         print(#function)
+        
+        print(configuration.calendar?.displayString)
+        
         var entries: [SimpleEntry] = []
 
-        let eKEvents = getEvents()
+        let eKEvents = getEvents(calendarName: configuration.calendar!.displayString)
         if eKEvents.count > 1 {
             let event = EventsModelWidget()
             event.startDate = eKEvents[0].startDate
@@ -71,6 +74,20 @@ struct Provider: IntentTimelineProvider {
         var selectCalendars: [EKCalendar] = []
         for calendar in calendarAll {
             if calendar.title == "FC Barcelona" {
+                selectCalendars.append(calendar)
+                break
+            }
+        }
+        let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: selectCalendars)
+        let result = self.eventStore.events(matching: predicate)
+        return result
+    }
+
+    func getEvents(calendarName: String) -> [EKEvent] {
+        let calendarAll = eventStore.calendars(for: .event)
+        var selectCalendars: [EKCalendar] = []
+        for calendar in calendarAll {
+            if calendar.title == calendarName {
                 selectCalendars.append(calendar)
                 break
             }

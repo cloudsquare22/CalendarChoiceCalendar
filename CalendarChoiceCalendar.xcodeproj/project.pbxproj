@@ -32,6 +32,7 @@
 		8D91C4D1253CEEEA006ABF39 /* NextEventData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91C4D0253CEEE9006ABF39 /* NextEventData.swift */; };
 		8D91C4D5253DBC54006ABF39 /* NextEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91C4D4253DBC54006ABF39 /* NextEventView.swift */; };
 		8D91C4D9253DBF2E006ABF39 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91C4D8253DBF2E006ABF39 /* CalendarView.swift */; };
+		8DBAE35025589C2600C1AA1D /* Choi_Cal.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D268A254D82D000853530 /* Choi_Cal.intentdefinition */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -209,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				8D543B9F252D1A7900A64939 /* Choi_Cal.swift */,
+				8D7D268A254D82D000853530 /* Choi_Cal.intentdefinition */,
 				8D543BA2252D1A7A00A64939 /* Assets.xcassets */,
 				8D543BA4252D1A7A00A64939 /* Info.plist */,
 			);
@@ -218,7 +220,6 @@
 		8D7D275D254D877C00853530 /* CalendarIntent */ = {
 			isa = PBXGroup;
 			children = (
-				8D7D268A254D82D000853530 /* Choi_Cal.intentdefinition */,
 				8D7D275E254D877C00853530 /* IntentHandler.swift */,
 				8D7D2760254D877C00853530 /* Info.plist */,
 			);
@@ -422,6 +423,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DBAE35025589C2600C1AA1D /* Choi_Cal.intentdefinition in Sources */,
 				8D7D275F254D877C00853530 /* IntentHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
