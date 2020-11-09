@@ -24,7 +24,7 @@ struct Provider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let eKEvents = getEvents()
+        let eKEvents = getEvents(calendarName: "")
         let event = EventsModelWidget()
         if eKEvents.count > 0 {
             event.startDate = eKEvents[0].startDate
@@ -69,28 +69,19 @@ struct Provider: IntentTimelineProvider {
         completion(timeline)
     }
 
-    func getEvents() -> [EKEvent] {
-        let calendarAll = eventStore.calendars(for: .event)
-        var selectCalendars: [EKCalendar] = []
-        for calendar in calendarAll {
-            if calendar.title == "FC Barcelona" {
-                selectCalendars.append(calendar)
-                break
-            }
-        }
-        let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: selectCalendars)
-        let result = self.eventStore.events(matching: predicate)
-        return result
-    }
-
     func getEvents(calendarName: String) -> [EKEvent] {
         let calendarAll = eventStore.calendars(for: .event)
         var selectCalendars: [EKCalendar] = []
-        for calendar in calendarAll {
-            if calendar.title == calendarName {
-                selectCalendars.append(calendar)
-                break
+        if calendarName.isEmpty == false {
+            for calendar in calendarAll {
+                if calendar.title == calendarName {
+                    selectCalendars.append(calendar)
+                    break
+                }
             }
+        }
+        else {
+            selectCalendars = calendarAll
         }
         let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: selectCalendars)
         let result = self.eventStore.events(matching: predicate)
