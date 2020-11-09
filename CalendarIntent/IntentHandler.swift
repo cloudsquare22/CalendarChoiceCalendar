@@ -11,7 +11,10 @@ import EventKit
 class IntentHandler: INExtension, ConfigurationIntentHandling {
     func provideCalendarOptionsCollection(for intent: ConfigurationIntent, with completion: @escaping (INObjectCollection<SelectCalendar>?, Error?) -> Void) {
         let eventStore = EKEventStore()
-        let calendars = eventStore.calendars(for: .event)
+        var calendars = eventStore.calendars(for: .event)
+        calendars.sort() { (a,b) in
+            a.title < b.title
+        }
         var selectCalendars: [SelectCalendar] = []
         for calendar in calendars {
             let selectCalendar = SelectCalendar(identifier: calendar.calendarIdentifier, display: calendar.title)
