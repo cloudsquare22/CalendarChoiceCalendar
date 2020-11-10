@@ -28,8 +28,7 @@ struct Provider: IntentTimelineProvider {
         let event = EventsModelWidget()
         if eKEvents.count > 0 {
             event.startDate = eKEvents[0].startDate
-//            event.title = eKEvents[0].title
-            event.title = #function
+            event.title = eKEvents[0].title
             event.calenderTitle = eKEvents[0].calendar.title
             event.calendarColor = Color(eKEvents[0].calendar.cgColor)
         }
