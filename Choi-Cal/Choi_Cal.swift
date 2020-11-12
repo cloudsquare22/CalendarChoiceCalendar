@@ -40,11 +40,12 @@ struct Provider: IntentTimelineProvider {
     func getTimeline(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         print(#function)
         
-        print(configuration.calendar?.displayString)
+//        print(configuration.calendar?.displayString)
         
         var entries: [SimpleEntry] = []
-
-        let eKEvents = getEvents(calendarName: configuration.calendar!.displayString)
+        
+        let selectCalendar = configuration.calendar == nil ? "" : configuration.calendar!.displayString
+        let eKEvents = getEvents(calendarName: selectCalendar)
         if eKEvents.count > 1 {
             let event = EventsModelWidget()
             event.startDate = eKEvents[0].startDate
