@@ -44,7 +44,7 @@ struct Provider: IntentTimelineProvider {
         
         var entries: [SimpleEntry] = []
         
-        let selectCalendar = configuration.calendar == nil ? "" : configuration.calendar!.displayString
+        let selectCalendar = configuration.calendar?.displayString ?? ""
         let eKEvents = getEvents(calendarName: selectCalendar)
         if eKEvents.count > 1 {
             let event = EventsModelWidget()
@@ -84,7 +84,13 @@ struct Provider: IntentTimelineProvider {
             selectCalendars = calendarAll
         }
         let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: selectCalendars)
-        let result = self.eventStore.events(matching: predicate)
+        let events = self.eventStore.events(matching: predicate)
+        var result: [EKEvent] = []
+        for event in events {
+            if event.isAllDay == false {
+                result.append(event)
+            }
+        }
         return result
     }
 }
