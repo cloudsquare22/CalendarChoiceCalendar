@@ -20,8 +20,10 @@ class EventsModel: ObservableObject {
     init() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(EventsModel.changeEvent(_:)), name: NSNotification.Name.EKEventStoreChanged, object: eventStore)
-        eventStore.requestAccess(to: .event) { (access, _) in
-            print("EKEventStore requestAccess: \(access)")
+        if EKEventStore.authorizationStatus(for: .event) != .authorized {
+            eventStore.requestAccess(to: .event) { (access, _) in
+                print("EKEventStore requestAccess: \(access)")
+            }
         }
         self.updateNextEvents()
     }
@@ -33,6 +35,11 @@ class EventsModel: ObservableObject {
     }
 
     func updateNextEvents() {
+        print(#function)
+        
+        guard EKEventStore.authorizationStatus(for: .event) == .authorized else {
+            return
+        }
         if let offs = UserDefaults.standard.stringArray(forKey: "offCalendar") {
             offCalendar = offs
             print(offCalendar)
@@ -79,6 +86,9 @@ class EventsModel: ObservableObject {
         let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: [calendar])
         let events = eventStore.events(matching: predicate)
         for event in events {
+            if event.startDate < Date() {
+                continue
+            }
             let eventDispModel = EventDispModel(startDate: event.startDate, eventTitle: event.title, calendar: calendar, isOn: true)
             eventList.append(eventDispModel)
         }
