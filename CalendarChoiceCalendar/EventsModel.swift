@@ -58,14 +58,17 @@ class EventsModel: ObservableObject {
             }
             let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: [calendar])
             let events = eventStore.events(matching: predicate)
-            if 0 < events.count {
-                let event = EventDispModel(index: index, startDate: events[0].startDate, eventTitle: events[0].title, calendar: calendar, isOn: isOn)
-                self.nextEvents.append(event)
+            var addEvent = EventDispModel(index: index, startDate: Date(), eventTitle: "", calendar: calendar, isOn: isOn)
+            for event in events {
+                if event.startDate < Date() {
+                    continue
+                }
+                else {
+                    addEvent = EventDispModel(index: index, startDate: event.startDate, eventTitle: event.title, calendar: calendar, isOn: isOn)
+                    break;
+                }
             }
-            else {
-                let event = EventDispModel(index: index, startDate: Date(), eventTitle: "", calendar: calendar, isOn: isOn)
-                self.nextEvents.append(event)
-            }
+            self.nextEvents.append(addEvent)
             index = index + 1
             print(calendar)
         }
