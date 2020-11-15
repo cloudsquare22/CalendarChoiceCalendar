@@ -25,6 +25,7 @@ struct CalendarView: View {
                                     eventsModel.nextEvents[nextEvent.index].isOn = false
                                     self.eventsModel.updateOffCalendar()
                                 }
+                                .font(.title)
                         }
                         else {
                             Image(systemName: "square")
@@ -33,10 +34,12 @@ struct CalendarView: View {
                                     eventsModel.nextEvents[nextEvent.index].isOn = true
                                     self.eventsModel.updateOffCalendar()
                                 }
+                                .font(.title)
                         }
                     }
                 }
             }
+            .padding(8)
             .navigationBarTitle("Calendar", displayMode: .inline)
             .navigationBarItems(trailing: Image(systemName: "arrow.counterclockwise")
                                     .foregroundColor(.blue)

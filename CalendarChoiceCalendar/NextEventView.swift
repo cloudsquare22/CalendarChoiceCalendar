@@ -17,7 +17,7 @@ struct NextEventView: View {
                     if event.isOn == true {
                         NavigationLink(
                             destination: EventListView(eventList: self.eventsModel.getEventList(calendar: event.calendar), title: event.calendar.title)) {
-                            VStack {
+                            VStack(alignment: .leading, spacing: 8.0) {
                                 HStack {
                                     Text(event.calendar.title)
                                         .foregroundColor(Color(event.calendar.cgColor))

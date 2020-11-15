@@ -120,14 +120,6 @@ struct Choi_CalEntryView : View {
                     Text(entry.event.startDate, style: .timer)
                         .font(.footnote)
                 }
-//                HStack {
-//                    Spacer()
-//                    Text(entry.event.calenderTitle)
-//                        .foregroundColor(.gray)
-//                        .font(.custom("endline", size: 10.0))
-//                        .fontWeight(.light)
-//                    Spacer()
-//                }
             }
         }
         .padding(8)
