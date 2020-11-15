@@ -11,9 +11,7 @@ import WidgetKit
 
 class EventsModel: ObservableObject {
     
-    @Published var events: [EKEvent] = []
     @Published var nextEvents: [EventDispModel] = []
-    @Published var calendarEventList: [EventDispModel] = []
     var offCalendar: [String] = []
     let eventStore = EKEventStore()
     
@@ -36,7 +34,7 @@ class EventsModel: ObservableObject {
 
     func updateNextEvents() {
         print(#function)
-        
+
         guard EKEventStore.authorizationStatus(for: .event) == .authorized else {
             return
         }
