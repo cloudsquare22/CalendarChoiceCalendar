@@ -18,15 +18,23 @@ struct CalendarView: View {
                         Text(nextEvent.calendar.title)
                             .foregroundColor(Color(nextEvent.calendar.cgColor))
                         Spacer()
-                        Toggle(isOn: $eventsModel.nextEvents[nextEvent.index].isOn, label: {
-                            Text("Label")
-                        })
-                        .labelsHidden()
+                        if nextEvent.isOn == true {
+                            Image(systemName: "checkmark.square")
+                                .onTapGesture {
+                                    print("\(eventsModel.nextEvents[nextEvent.index].calendar.title) off")
+                                    eventsModel.nextEvents[nextEvent.index].isOn = false
+                                    self.eventsModel.updateOffCalendar()
+                                }
+                        }
+                        else {
+                            Image(systemName: "square")
+                                .onTapGesture {
+                                    print("\(eventsModel.nextEvents[nextEvent.index].calendar.title) on")
+                                    eventsModel.nextEvents[nextEvent.index].isOn = true
+                                    self.eventsModel.updateOffCalendar()
+                                }
+                        }
                     }
-                    .onChange(of: eventsModel.nextEvents[nextEvent.index].isOn, perform: { value in
-                        print("isOn Change:\(value) \(eventsModel.nextEvents[nextEvent.index].calendar.title)")
-                        self.eventsModel.updateOffCalendar()
-                    })
                 }
             }
             .navigationBarTitle("Calendar", displayMode: .inline)
