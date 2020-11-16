@@ -14,7 +14,7 @@ struct EventListView: View {
     var body: some View {
         List {
             ForEach(self.eventList) { event in
-                VStack {
+                VStack(alignment: .leading, spacing: 8.0) {
                     HStack {
                         if event.eventTitle != "" {
                             Text(EventsModel.dateDisp(date: event.startDate))

@@ -9,24 +9,28 @@ import SwiftUI
 
 struct MainView: View {
     @EnvironmentObject var eventsModel: EventsModel
+    @State private var selection = 1
     
     var body: some View {
-        TabView {
-            NextEventView()
-                .tabItem {
-                    Image(systemName: "deskclock")
-                    Text("Next Event")
-                }
+        TabView(selection: $selection) {
             CalendarView()
                 .tabItem {
                     Image(systemName: "calendar")
                     Text("Calendar")
                 }
-            Text("Setting")
+                .tag(0)
+            NextEventView()
+                .tabItem {
+                    Image(systemName: "deskclock")
+                    Text("Next Event")
+                }
+                .tag(1)
+            SettingView()
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Setting")
                 }
+                .tag(2)
         }
     }
 }
