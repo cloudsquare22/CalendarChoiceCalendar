@@ -135,7 +135,7 @@ struct Choi_Cal: Widget {
             Choi_CalEntryView(entry: entry)
         }
         .configurationDisplayName("neCal")
-        .description("Next Calendar Configuration.")
+        .description("Select the calendar for the next event.")
         .supportedFamilies([.systemSmall])
     }
 }
@@ -143,8 +143,11 @@ struct Choi_Cal: Widget {
 struct Choi_Cal_Previews: PreviewProvider {
     static let event = EventsModelWidget()
     static var previews: some View {
-        Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+        Group {
+            Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
+
+        }
 //        Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
 //            .previewContext(WidgetPreviewContext(family: .systemMedium))
 //        Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
