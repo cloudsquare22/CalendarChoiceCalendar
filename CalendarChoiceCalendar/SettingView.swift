@@ -11,15 +11,20 @@ struct SettingView: View {
     let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
     
     var body: some View {
-        List {
-            Section(header: Text("About")) {
-                VStack {
-                    Text("neCal")
-                        .font(.title)
-                    Text("Version \(version)")
+        NavigationView {
+            List {
+                Section(header: Text("About")) {
+                    VStack {
+                        Text("neCal")
+                            .font(.title)
+                        Text("Version \(version)")
+                    }
                 }
             }
+            .padding(8)
+            .navigationBarTitle("Setting", displayMode: .inline)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

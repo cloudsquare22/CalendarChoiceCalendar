@@ -62,7 +62,7 @@ class EventsModel: ObservableObject {
                     continue
                 }
                 else {
-                    addEvent = EventDispModel(index: index, startDate: event.startDate, eventTitle: event.title, calendar: calendar, isOn: isOn)
+                    addEvent = EventDispModel(index: index, startDate: event.startDate, eventTitle: event.title, isAllDay: event.isAllDay, calendar: calendar, isOn: isOn)
                     break;
                 }
             }
@@ -90,16 +90,21 @@ class EventsModel: ObservableObject {
             if event.startDate < Date() {
                 continue
             }
-            let eventDispModel = EventDispModel(startDate: event.startDate, eventTitle: event.title, calendar: calendar, isOn: true)
+            let eventDispModel = EventDispModel(startDate: event.startDate, eventTitle: event.title, isAllDay: event.isAllDay, calendar: calendar, isOn: true)
             eventList.append(eventDispModel)
         }
         return eventList
     }
     
-    static func dateDisp(date: Date) -> String {
+    static func dateDisp(date: Date, isAllDay: Bool = false) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .full
-        dateFormatter.timeStyle = .short
+        if isAllDay == false {
+            dateFormatter.timeStyle = .short
+        }
+        else {
+            dateFormatter.timeStyle = .none
+        }
         dateFormatter.locale = .current
         return dateFormatter.string(from: date)
     }
@@ -111,6 +116,7 @@ struct EventDispModel: Identifiable {
     var index: Int = 0
     let startDate: Date
     let eventTitle: String
+    var isAllDay: Bool = false
     let calendar: EKCalendar
     var isOn: Bool
 }
