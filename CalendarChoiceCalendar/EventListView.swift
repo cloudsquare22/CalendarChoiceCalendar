@@ -16,11 +16,8 @@ struct EventListView: View {
             ForEach(self.eventList) { event in
                 VStack(alignment: .leading, spacing: 8.0) {
                     HStack {
-                        if event.isAllDay == true {
-                            Text(EventsModel.dateDisp(date: event.startDate) + " Allday")
-                        }
-                        else if event.eventTitle != "" {
-                            Text(EventsModel.dateDisp(date: event.startDate))
+                        if event.eventTitle != "" {
+                            Text(EventsModel.dateDisp(date: event.startDate, isAllDay: event.isAllDay))
                         }
                         else {
                             Text("-")

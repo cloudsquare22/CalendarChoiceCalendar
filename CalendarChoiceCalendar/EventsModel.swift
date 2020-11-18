@@ -99,14 +99,16 @@ class EventsModel: ObservableObject {
     static func dateDisp(date: Date, isAllDay: Bool = false) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .full
+        var addString = ""
         if isAllDay == false {
             dateFormatter.timeStyle = .short
         }
         else {
             dateFormatter.timeStyle = .none
+            addString = " Allday"
         }
         dateFormatter.locale = .current
-        return dateFormatter.string(from: date)
+        return dateFormatter.string(from: date) + addString
     }
 
 }
