@@ -19,7 +19,7 @@ struct Provider: IntentTimelineProvider {
         event.startDate = Date()
         event.title = "Event xxx"
         event.calenderTitle = "Calendar xxx"
-        event.calendarColor = .green
+        event.calendarColor = .red
         return SimpleEntry(date: Date(), event: event, configuration: ConfigurationIntent())
     }
 
@@ -47,21 +47,34 @@ struct Provider: IntentTimelineProvider {
         let selectCalendar = configuration.calendar?.displayString ?? ""
         let eKEvents = getEvents(calendarName: selectCalendar)
         var nextDate = Date()
-        for eKEvent in eKEvents {
-            let event = EventsModelWidget()
-            event.startDate = eKEvent.startDate
-            event.title = eKEvent.title
-            event.calenderTitle = eKEvent.calendar.title
-            event.calendarColor = Color(eKEvent.calendar.cgColor)
-            let entry = SimpleEntry(date: nextDate, event: event, configuration: configuration)
-            entries.append(entry)
-            nextDate = eKEvent.startDate
-            if entries.count >= 2 {
-                break
+        var timelineReloadPolicy: TimelineReloadPolicy = .atEnd
+        if eKEvents.count > 0 {
+            for eKEvent in eKEvents {
+                let event = EventsModelWidget()
+                event.startDate = eKEvent.startDate
+                event.title = eKEvent.title
+                event.calenderTitle = eKEvent.calendar.title
+                event.calendarColor = Color(eKEvent.calendar.cgColor)
+                let entry = SimpleEntry(date: nextDate, event: event, configuration: configuration)
+                entries.append(entry)
+                nextDate = eKEvent.startDate
+                if entries.count >= 2 {
+                    break
+                }
             }
         }
+        else {
+            let event = EventsModelWidget()
+            event.startDate = Date()
+            event.title = "No Event"
+            event.calenderTitle = configuration.calendar?.displayString ?? "No select"
+            event.calendarColor = .red
+            let entry = SimpleEntry(date: Date(), event: event, configuration: configuration)
+            entries.append(entry)
+            timelineReloadPolicy = .never
+        }
         print(entries)
-        let timeline = Timeline(entries: entries, policy: .atEnd)
+        let timeline = Timeline(entries: entries, policy: timelineReloadPolicy)
         completion(timeline)
     }
 
@@ -159,7 +172,7 @@ class EventsModelWidget {
     var startDate: Date = Date()
     var title: String = "-"
     var calenderTitle: String = "-"
-    var calendarColor: Color = .black
+    var calendarColor: Color = .red
     
     var dispStartDate: String {
         let dateFormatter = DateFormatter()

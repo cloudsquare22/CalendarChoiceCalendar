@@ -14,14 +14,19 @@ struct SettingView: View {
         NavigationView {
             List {
                 Section(header: Text("About")) {
-                    VStack {
-                        Text("neCal")
-                            .font(.title)
-                        Text("Version \(version)")
+                    HStack {
+                        Spacer()
+                        VStack(){
+                            Image("neCal")
+                            Text("neCal")
+                                .font(.largeTitle)
+                            Text("Version \(version)")
+                        }
+                        Spacer()
                     }
                 }
             }
-            .padding(8)
+//            .padding(8)
             .navigationBarTitle("Setting", displayMode: .inline)
         }
         .navigationViewStyle(StackNavigationViewStyle())

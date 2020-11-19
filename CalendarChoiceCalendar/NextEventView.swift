@@ -25,7 +25,7 @@ struct NextEventView: View {
                                 }
                                 HStack {
                                     if event.eventTitle != "" {
-                                        Text(EventsModel.dateDisp(date: event.startDate))
+                                        Text(EventsModel.dateDisp(date: event.startDate, isAllDay: event.isAllDay))
                                     }
                                     else {
                                         Text("-")
