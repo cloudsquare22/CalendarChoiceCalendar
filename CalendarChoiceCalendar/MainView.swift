@@ -10,7 +10,8 @@ import SwiftUI
 struct MainView: View {
     @EnvironmentObject var eventsModel: EventsModel
     @State private var selection = 1
-    
+    @Environment(\.scenePhase) private var scenePhase
+
     var body: some View {
         TabView(selection: $selection) {
             CalendarView()
@@ -31,6 +32,19 @@ struct MainView: View {
                     Text("Setting")
                 }
                 .tag(2)
+        }
+        .onChange(of: scenePhase) { phase in
+            print("Scene:\(phase)")
+            switch(phase) {
+            case .active:
+                self.eventsModel.updateNextEvents()
+            case .background:
+                break
+            case .inactive:
+                break
+            @unknown default:
+                fatalError()
+            }
         }
     }
 }
