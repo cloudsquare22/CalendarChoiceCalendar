@@ -68,7 +68,7 @@ struct Provider: IntentTimelineProvider {
             let event = EventsModelWidget()
             event.isNoEvent = true
             event.startDate = Date()
-            event.title = "No Event"
+            event.title = "No Next Event"
             event.calenderTitle = configuration.calendar?.displayString ?? "No select"
             if selectCalendars.count > 0 {
                 event.calendarColor = Color(selectCalendars[0].cgColor)
@@ -163,13 +163,9 @@ struct Choi_CalEntryView : View {
                         Text(entry.event.dispStartDate)
                             .font(.footnote)
                     }
-                    else {
-                        Text("-")
-                            .font(.footnote)
-                    }
                     Text(entry.event.title)
                         .font(.footnote)
-                    if entry.event.isNoEvent == false {
+                    if entry.event.isNoEvent == false && Date() <= entry.event.startDate {
                         Text(entry.event.startDate, style: .timer)
                             .font(.footnote)
                     }
