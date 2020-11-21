@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct MainView: View {
     @EnvironmentObject var eventsModel: EventsModel
@@ -38,6 +39,7 @@ struct MainView: View {
             switch(phase) {
             case .active:
                 self.eventsModel.updateNextEvents()
+                WidgetCenter.shared.reloadAllTimelines()
             case .background:
                 break
             case .inactive:
