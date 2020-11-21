@@ -45,7 +45,8 @@ struct Provider: IntentTimelineProvider {
         var entries: [SimpleEntry] = []
         
         let selectCalendar = configuration.calendar?.displayString ?? ""
-        let eKEvents = getEvents(calendarName: selectCalendar)
+        let selectCalendars = self.getCalendar(calendarName: selectCalendar)
+        let eKEvents = getEvents(selectCalendars: selectCalendars)
         var nextDate = Date()
         var timelineReloadPolicy: TimelineReloadPolicy = .atEnd
         if eKEvents.count > 0 {
@@ -65,10 +66,13 @@ struct Provider: IntentTimelineProvider {
         }
         else {
             let event = EventsModelWidget()
+            event.isNoEvent = true
             event.startDate = Date()
             event.title = "No Event"
             event.calenderTitle = configuration.calendar?.displayString ?? "No select"
-            event.calendarColor = .red
+            if selectCalendars.count > 0 {
+                event.calendarColor = Color(selectCalendars[0].cgColor)
+            }
             let entry = SimpleEntry(date: Date(), event: event, configuration: configuration)
             entries.append(entry)
             timelineReloadPolicy = .never
@@ -76,6 +80,35 @@ struct Provider: IntentTimelineProvider {
         print(entries)
         let timeline = Timeline(entries: entries, policy: timelineReloadPolicy)
         completion(timeline)
+    }
+    
+    func getCalendar(calendarName: String) -> [EKCalendar] {
+        let calendarAll = eventStore.calendars(for: .event)
+        var result: [EKCalendar] = []
+        if calendarName.isEmpty == false {
+            for calendar in calendarAll {
+                if calendar.title == calendarName {
+                    result.append(calendar)
+                    break
+                }
+            }
+        }
+        else {
+            result = calendarAll
+        }
+        return result
+    }
+
+    func getEvents(selectCalendars: [EKCalendar]) -> [EKEvent] {
+        let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: selectCalendars)
+        let events = self.eventStore.events(matching: predicate)
+        var result: [EKEvent] = []
+        for event in events {
+            if event.isAllDay == false {
+                result.append(event)
+            }
+        }
+        return result
     }
 
     func getEvents(calendarName: String) -> [EKEvent] {
@@ -126,12 +159,20 @@ struct Choi_CalEntryView : View {
                     .fill(entry.event.calendarColor)
                     .frame(width: geometry.size.width, height: 3, alignment: .center)
                 VStack(alignment: .leading, spacing: 8.0) {
-                    Text(entry.event.dispStartDate)
-                        .font(.footnote)
+                    if entry.event.isNoEvent == false {
+                        Text(entry.event.dispStartDate)
+                            .font(.footnote)
+                    }
+                    else {
+                        Text("-")
+                            .font(.footnote)
+                    }
                     Text(entry.event.title)
                         .font(.footnote)
-                    Text(entry.event.startDate, style: .timer)
-                        .font(.footnote)
+                    if entry.event.isNoEvent == false {
+                        Text(entry.event.startDate, style: .timer)
+                            .font(.footnote)
+                    }
                 }
             }
         }
@@ -173,6 +214,7 @@ class EventsModelWidget {
     var title: String = "-"
     var calenderTitle: String = "-"
     var calendarColor: Color = .red
+    var isNoEvent: Bool = false
     
     var dispStartDate: String {
         let dateFormatter = DateFormatter()
