@@ -14,6 +14,7 @@ class EventsModel: ObservableObject {
     @Published var nextEvents: [EventDispModel] = []
     var offCalendar: [String] = []
     let eventStore = EKEventStore()
+    static let KEY_OFFCALENDAR = "offCalendar"
     
     init() {
         let notificationCenter = NotificationCenter.default
@@ -38,9 +39,9 @@ class EventsModel: ObservableObject {
         guard EKEventStore.authorizationStatus(for: .event) == .authorized else {
             return
         }
-        if let offs = UserDefaults.standard.stringArray(forKey: "offCalendar") {
-            offCalendar = offs
-            print(offCalendar)
+        if let offs = UserDefaults.standard.stringArray(forKey: EventsModel.KEY_OFFCALENDAR) {
+            self.offCalendar = offs
+            print("Off Calendar:\(self.offCalendar)")
         }
         
         self.nextEvents = []
@@ -48,28 +49,7 @@ class EventsModel: ObservableObject {
         calendars.sort() { (a,b) in
             a.title < b.title
         }
-        var index = 0
-        for calendar in calendars {
-            var isOn = true
-            if self.offCalendar.contains(calendar.title) {
-                isOn = false
-            }
-            let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: [calendar])
-            let events = eventStore.events(matching: predicate)
-            var addEvent = EventDispModel(index: index, startDate: Date(), eventTitle: "", calendar: calendar, isOn: isOn)
-            for event in events {
-                if event.startDate < Date() {
-                    continue
-                }
-                else {
-                    addEvent = EventDispModel(index: index, startDate: event.startDate, eventTitle: event.title, isAllDay: event.isAllDay, calendar: calendar, isOn: isOn)
-                    break;
-                }
-            }
-            self.nextEvents.append(addEvent)
-            index = index + 1
-            print(calendar)
-        }
+        self.nextEvents = self.getEventList(calendars: calendars, isOnce: true)
     }
     
     func updateOffCalendar() {
@@ -79,19 +59,33 @@ class EventsModel: ObservableObject {
                 offCalendar.append(event.calendar.title)
             }
         }
-        UserDefaults.standard.setValue(offCalendar, forKey: "offCalendar")
+        UserDefaults.standard.setValue(offCalendar, forKey: EventsModel.KEY_OFFCALENDAR)
     }
     
-    func getEventList(calendar: EKCalendar) -> [EventDispModel] {
+    func getEventList(calendars: [EKCalendar], isOnce: Bool = false) -> [EventDispModel] {
         var eventList: [EventDispModel] = []
-        let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: [calendar])
-        let events = eventStore.events(matching: predicate)
-        for event in events {
-            if event.startDate < Date() {
-                continue
+        for calendar in calendars {
+            let isOn = self.offCalendar.contains(calendar.title) == true ? false : true
+            let predicate = eventStore.predicateForEvents(withStart: Date(), end: Date()  + (86400 * 365), calendars: [calendar])
+            let events = eventStore.events(matching: predicate)
+            var isAddCalendarEvent = false
+            for event in events {
+                if event.startDate < Date() {
+                    continue
+                }
+                else {
+                    let addEvent = EventDispModel(index: eventList.count, startDate: event.startDate, eventTitle: event.title, isAllDay: event.isAllDay, calendar: calendar, isOn: isOn)
+                    eventList.append(addEvent)
+                    isAddCalendarEvent = true
+                    if isOnce == true {
+                        break;
+                    }
+                }
             }
-            let eventDispModel = EventDispModel(startDate: event.startDate, eventTitle: event.title, isAllDay: event.isAllDay, calendar: calendar, isOn: true)
-            eventList.append(eventDispModel)
+            if isAddCalendarEvent == false {
+                let addEvent = EventDispModel(index: eventList.count, startDate: Date(), eventTitle: "", calendar: calendar, isOn: isOn)
+                eventList.append(addEvent)
+            }
         }
         return eventList
     }

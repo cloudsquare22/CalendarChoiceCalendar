@@ -15,8 +15,6 @@ struct CalendarChoiceCalendarApp: App {
         WindowGroup {
             MainView()
                 .environmentObject(EventsModel())
-//            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

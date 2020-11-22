@@ -16,7 +16,7 @@ struct NextEventView: View {
                 ForEach(self.eventsModel.nextEvents) { event in
                     if event.isOn == true {
                         NavigationLink(
-                            destination: EventListView(eventList: self.eventsModel.getEventList(calendar: event.calendar), title: event.calendar.title)) {
+                            destination: EventListView(eventList: self.eventsModel.getEventList(calendars: [event.calendar]), title: event.calendar.title)) {
                             VStack(alignment: .leading, spacing: 8.0) {
                                 HStack {
                                     Text(event.calendar.title)
