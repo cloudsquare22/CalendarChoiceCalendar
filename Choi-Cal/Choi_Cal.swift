@@ -69,7 +69,6 @@ struct Provider: IntentTimelineProvider {
         else {
             let event = EventsModelWidget()
             event.isNoEvent = true
-            event.startDate = Date()
             event.title = "No Next Event"
             event.calenderTitle = configuration.calendar?.displayString ?? "No select"
             if selectCalendars.count > 0 {
