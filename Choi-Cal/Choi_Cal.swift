@@ -27,14 +27,10 @@ struct Provider: IntentTimelineProvider {
         let selectCalendar = configuration.calendar?.displayString ?? ""
         let selectCalendars = self.getCalendar(calendarName: selectCalendar)
         let eKEvents = getEvents(selectCalendars: selectCalendars)
-        let event = EventsModelWidget()
+        var event = EventsModelWidget()
         if eKEvents.count > 0 {
-            event.startDate = eKEvents[0].startDate
-            event.title = eKEvents[0].title
-            event.calenderTitle = eKEvents[0].calendar.title
-            event.calendarColor = Color(eKEvents[0].calendar.cgColor)
+            event = EventsModelWidget.cretate(eKEvent: eKEvents[0])
         }
-
         let entry = SimpleEntry(date: Date(), event: event, configuration: configuration)
         completion(entry)
     }
@@ -53,11 +49,7 @@ struct Provider: IntentTimelineProvider {
         var timelineReloadPolicy: TimelineReloadPolicy = .atEnd
         if eKEvents.count > 0 {
             for eKEvent in eKEvents {
-                let event = EventsModelWidget()
-                event.startDate = eKEvent.startDate
-                event.title = eKEvent.title
-                event.calenderTitle = eKEvent.calendar.title
-                event.calendarColor = Color(eKEvent.calendar.cgColor)
+                let event = EventsModelWidget.cretate(eKEvent: eKEvent)
                 let entry = SimpleEntry(date: nextDate, event: event, configuration: configuration)
                 entries.append(entry)
                 nextDate = eKEvent.startDate
@@ -196,5 +188,14 @@ class EventsModelWidget {
 //        dateFormatter.timeStyle = .short
         dateFormatter.locale = .current
         return dateFormatter.string(from: self.startDate)
+    }
+    
+    static func cretate(eKEvent: EKEvent) -> EventsModelWidget {
+        let event = EventsModelWidget()
+        event.startDate = eKEvent.startDate
+        event.title = eKEvent.title
+        event.calenderTitle = eKEvent.calendar.title
+        event.calendarColor = Color(eKEvent.calendar.cgColor)
+        return event
     }
 }
