@@ -19,11 +19,6 @@ class EventsModel: ObservableObject {
     init() {
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(EventsModel.changeEvent(_:)), name: NSNotification.Name.EKEventStoreChanged, object: eventStore)
-        if EKEventStore.authorizationStatus(for: .event) != .authorized {
-            eventStore.requestAccess(to: .event) { (access, _) in
-                print("EKEventStore requestAccess: \(access)")
-            }
-        }
         self.updateNextEvents()
     }
     

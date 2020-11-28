@@ -68,7 +68,7 @@ struct Provider: IntentTimelineProvider {
             }
             let entry = SimpleEntry(date: Date(), event: event, configuration: configuration)
             entries.append(entry)
-            timelineReloadPolicy = .never
+            timelineReloadPolicy = .after(Date() + 3600)
         }
         print(entries)
         let timeline = Timeline(entries: entries, policy: timelineReloadPolicy)
