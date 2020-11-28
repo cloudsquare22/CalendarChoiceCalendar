@@ -184,8 +184,6 @@ class EventsModelWidget {
     var dispStartDate: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "M/d H:mm〜"
-//        dateFormatter.dateStyle = .short
-//        dateFormatter.timeStyle = .short
         dateFormatter.locale = .current
         return dateFormatter.string(from: self.startDate)
     }
