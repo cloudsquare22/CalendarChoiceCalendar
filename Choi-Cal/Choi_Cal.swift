@@ -57,6 +57,9 @@ struct Provider: IntentTimelineProvider {
                     break
                 }
             }
+            if entries[entries.count - 1].date > (Date() + 3600) {
+                timelineReloadPolicy = .after(Date() + 3600)
+            }
         }
         else {
             let event = EventsModelWidget()
