@@ -18,6 +18,8 @@ struct SettingView: View {
                         Spacer()
                         VStack(){
                             Image("neCal")
+                                .resizable()
+                                .scaledToFit()
                             Text("neCal")
                                 .font(.largeTitle)
                             Text("Version \(version)")
