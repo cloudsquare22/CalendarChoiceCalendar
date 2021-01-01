@@ -28,6 +28,7 @@
 		8D7D2773254D877C00853530 /* CalendarIntent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8D7D275C254D877C00853530 /* CalendarIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8D91C4D5253DBC54006ABF39 /* NextEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91C4D4253DBC54006ABF39 /* NextEventView.swift */; };
 		8D91C4D9253DBF2E006ABF39 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91C4D8253DBF2E006ABF39 /* CalendarView.swift */; };
+		8DA8139F259E9A0800E5649C /* CopyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA8139E259E9A0800E5649C /* CopyEventView.swift */; };
 		8DBAE35025589C2600C1AA1D /* Choi_Cal.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D268A254D82D000853530 /* Choi_Cal.intentdefinition */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +92,7 @@
 		8D7D2760254D877C00853530 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D91C4D4253DBC54006ABF39 /* NextEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextEventView.swift; sourceTree = "<group>"; };
 		8D91C4D8253DBF2E006ABF39 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		8DA8139E259E9A0800E5649C /* CopyEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyEventView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +160,7 @@
 				8D91C4D8253DBF2E006ABF39 /* CalendarView.swift */,
 				8D25D247254447F200E9ACDD /* EventListView.swift */,
 				8D753D532563287B007386CB /* SettingView.swift */,
+				8DA8139E259E9A0800E5649C /* CopyEventView.swift */,
 			);
 			path = CalendarChoiceCalendar;
 			sourceTree = "<group>";
@@ -338,6 +341,7 @@
 				8D543B712529ACAC00A64939 /* ContentView.swift in Sources */,
 				8D543B7B2529ACAD00A64939 /* CalendarChoiceCalendar.xcdatamodeld in Sources */,
 				8D543B842529DF7F00A64939 /* MainView.swift in Sources */,
+				8DA8139F259E9A0800E5649C /* CopyEventView.swift in Sources */,
 				8D543B882529E22300A64939 /* EventsModel.swift in Sources */,
 				8D543B6F2529ACAC00A64939 /* CalendarChoiceCalendarApp.swift in Sources */,
 				8D753D542563287B007386CB /* SettingView.swift in Sources */,

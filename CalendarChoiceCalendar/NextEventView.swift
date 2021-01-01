@@ -15,8 +15,27 @@ struct NextEventView: View {
             List {
                 ForEach(self.eventsModel.nextEvents) { event in
                     if event.isOn == true {
-                        NavigationLink(
-                            destination: EventListView(eventList: self.eventsModel.getEventList(calendars: [event.calendar]), title: event.calendar.title)) {
+                        if event.eventTitle != "" {
+                            NavigationLink(
+                                destination: EventListView(eventList: self.eventsModel.getEventList(calendars: [event.calendar]), title: event.calendar.title)) {
+                                VStack(alignment: .leading, spacing: 8.0) {
+                                    HStack {
+                                        Text(event.calendar.title)
+                                            .foregroundColor(Color(event.calendar.cgColor))
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Text(EventsModel.dateDisp(date: event.startDate, isAllDay: event.isAllDay))
+                                        Spacer()
+                                    }
+                                    HStack {
+                                        Text(event.eventTitle)
+                                        Spacer()
+                                    }
+                                }
+                            }
+                        }
+                        else {
                             VStack(alignment: .leading, spacing: 8.0) {
                                 HStack {
                                     Text(event.calendar.title)
@@ -24,21 +43,11 @@ struct NextEventView: View {
                                     Spacer()
                                 }
                                 HStack {
-                                    if event.eventTitle != "" {
-                                        Text(EventsModel.dateDisp(date: event.startDate, isAllDay: event.isAllDay))
-                                    }
-                                    else {
-                                        Text("-")
-                                    }
+                                    Text("-")
                                     Spacer()
                                 }
                                 HStack {
-                                    if event.eventTitle != "" {
-                                        Text(event.eventTitle)
-                                    }
-                                    else {
-                                        Text("No event.")
-                                    }
+                                    Text("No event.")
                                     Spacer()
                                 }
                             }
