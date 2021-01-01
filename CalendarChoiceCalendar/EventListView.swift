@@ -9,31 +9,29 @@ import SwiftUI
 
 struct EventListView: View {
     @State var eventList: [EventDispModel]
+    @State var copyEvent = false
     let title: String
 
     var body: some View {
         List {
             ForEach(self.eventList) { event in
                 VStack(alignment: .leading, spacing: 8.0) {
-                    HStack {
-                        if event.eventTitle != "" {
+                    Button(action: {
+                        self.copyEvent.toggle()
+                    }, label: {
+                        HStack {
                             Text(EventsModel.dateDisp(date: event.startDate, isAllDay: event.isAllDay))
+                            Spacer()
                         }
-                        else {
-                            Text("-")
-                        }
-                        Spacer()
-                    }
-                    HStack {
-                        if event.eventTitle != "" {
+                        HStack {
                             Text(event.eventTitle)
+                            Spacer()
                         }
-                        else {
-                            Text("No event.")
-                        }
-                        Spacer()
-                    }
+                    })
                 }
+                .sheet(isPresented: self.$copyEvent, content: {
+                    CopyEventView(event: event)
+                })
             }
         }
         .padding(8)
