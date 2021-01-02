@@ -32,6 +32,11 @@ struct CopyEventView: View {
                 EventsModel.copyCalendar(eventDispModel: self.event, selectCalendar: self.eventsModel.nextEvents[self.selection].calendar)
             }, label: {
                 Text("Copy to calendar.")
+                    .padding(8)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 16)
+                                      .stroke(Color.blue, lineWidth: 1)
+                    )
             })
             .font(.title3)
         }
