@@ -69,7 +69,7 @@ class EventsModel: ObservableObject {
                     continue
                 }
                 else {
-                    let addEvent = EventDispModel(index: eventList.count, startDate: event.startDate, eventTitle: event.title, isAllDay: event.isAllDay, calendar: calendar, isOn: isOn)
+                    let addEvent = EventDispModel(index: eventList.count, startDate: event.startDate, eventTitle: event.title, isAllDay: event.isAllDay, calendar: calendar, isOn: isOn, event: event)
                     eventList.append(addEvent)
                     isAddCalendarEvent = true
                     if isOnce == true {
@@ -99,6 +99,28 @@ class EventsModel: ObservableObject {
         dateFormatter.locale = .current
         return dateFormatter.string(from: date) + addString
     }
+    
+    static func copyCalendar(eventDispModel: EventDispModel, selectCalendar: EKCalendar) {
+        let eventStore = EKEventStore()
+        let copyEvent = EKEvent(eventStore: eventStore)
+        copyEvent.title = eventDispModel.event!.title
+        copyEvent.startDate = eventDispModel.event!.startDate
+        copyEvent.endDate = eventDispModel.event!.endDate
+        copyEvent.isAllDay = eventDispModel.event!.isAllDay
+        copyEvent.location = eventDispModel.event!.location
+        copyEvent.timeZone = eventDispModel.event!.timeZone
+        copyEvent.url = eventDispModel.event!.url
+        copyEvent.notes = eventDispModel.event!.notes
+        copyEvent.calendar = eventStore.calendar(withIdentifier: selectCalendar.calendarIdentifier)
+        print(copyEvent)
+        do {
+            try eventStore.save(copyEvent, span: .thisEvent)
+        }
+        catch {
+            let nserror = error as NSError
+            print(nserror)
+        }
+    }
 
 }
 
@@ -110,4 +132,5 @@ struct EventDispModel: Identifiable {
     var isAllDay: Bool = false
     let calendar: EKCalendar
     var isOn: Bool
+    var event: EKEvent? = nil
 }
