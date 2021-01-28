@@ -10,6 +10,7 @@ import SwiftUI
 struct CopyEventView: View {
     let event: EventDispModel
     @EnvironmentObject var eventsModel: EventsModel
+    @Environment(\.presentationMode) var presentationMode
     @State var selection = 0
 
     var body: some View {
@@ -31,6 +32,7 @@ struct CopyEventView: View {
             })
             Button(action: {
                 EventsModel.copyCalendar(eventDispModel: self.event, selectCalendar: self.eventsModel.nextEvents[self.selection].calendar)
+                self.presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Copy to calendar.")
                     .padding(8)

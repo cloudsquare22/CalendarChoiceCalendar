@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EventListView: View {
+    @EnvironmentObject var eventsModel: EventsModel
     @State var eventList: [EventDispModel]
     @State var copyEvent = false
     let title: String
@@ -30,7 +31,7 @@ struct EventListView: View {
                     })
                 }
                 .sheet(isPresented: self.$copyEvent, content: {
-                    CopyEventView(event: event)
+                    CopyEventView(event: event).environmentObject(self.eventsModel)
                 })
             }
         }
