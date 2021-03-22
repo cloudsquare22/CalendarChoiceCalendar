@@ -15,13 +15,17 @@ struct CopyEventView: View {
 
     var body: some View {
         VStack {
-            Text(self.event.calendar.title)
-                .foregroundColor(Color(self.event.calendar.cgColor))
-                .font(.title3)
-            Text(self.event.eventTitle)
-                .font(.title3)
-            Text(EventsModel.dateDisp(date: self.event.startDate, isAllDay: self.event.isAllDay))
-                .font(.title3)
+            Spacer()
+            VStack(spacing: 4.0) {
+                Text(self.event.calendar.title)
+                    .foregroundColor(Color(self.event.calendar.cgColor))
+                    .font(.title2)
+                Text(self.event.eventTitle)
+                    .font(.title3)
+                Text(EventsModel.dateDisp(date: self.event.startDate, isAllDay: self.event.isAllDay))
+                    .font(.title3)
+            }
+//            Spacer()
             Picker(selection: self.$selection, label: Text("Calendar"), content: {
                 ForEach(0..<self.eventsModel.nextEvents.count) { index in
                     Text(self.eventsModel.nextEvents[index].calendar.title)
@@ -30,18 +34,25 @@ struct CopyEventView: View {
                         .padding()
                 }
             })
+            .padding(8)
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                              .stroke(Color.black, lineWidth: 1)
+            )
+//            Spacer()
             Button(action: {
                 EventsModel.copyCalendar(eventDispModel: self.event, selectCalendar: self.eventsModel.nextEvents[self.selection].calendar)
                 self.presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Copy to calendar.")
+                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                     .padding(8)
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
                                       .stroke(Color.blue, lineWidth: 1)
                     )
             })
-            .font(.title3)
+            Spacer()
         }
         .padding(8)
     }
