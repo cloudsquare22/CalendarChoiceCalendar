@@ -29,6 +29,7 @@
 		8D91C4D5253DBC54006ABF39 /* NextEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91C4D4253DBC54006ABF39 /* NextEventView.swift */; };
 		8D91C4D9253DBF2E006ABF39 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91C4D8253DBF2E006ABF39 /* CalendarView.swift */; };
 		8DA8139F259E9A0800E5649C /* CopyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA8139E259E9A0800E5649C /* CopyEventView.swift */; };
+		8DB3F29F2608BEDC00E278C6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8DB3F2A12608BEDC00E278C6 /* InfoPlist.strings */; };
 		8DBAE35025589C2600C1AA1D /* Choi_Cal.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D268A254D82D000853530 /* Choi_Cal.intentdefinition */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +94,7 @@
 		8D91C4D4253DBC54006ABF39 /* NextEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextEventView.swift; sourceTree = "<group>"; };
 		8D91C4D8253DBF2E006ABF39 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		8DA8139E259E9A0800E5649C /* CopyEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyEventView.swift; sourceTree = "<group>"; };
+		8DB3F2A02608BEDC00E278C6 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +153,7 @@
 				8D543B722529ACAD00A64939 /* Assets.xcassets */,
 				8D543B772529ACAD00A64939 /* Persistence.swift */,
 				8D543B7C2529ACAD00A64939 /* Info.plist */,
+				8DB3F2A12608BEDC00E278C6 /* InfoPlist.strings */,
 				8D543B792529ACAD00A64939 /* CalendarChoiceCalendar.xcdatamodeld */,
 				8D543B742529ACAD00A64939 /* Preview Content */,
 				8D543B832529DF7F00A64939 /* MainView.swift */,
@@ -307,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D543B762529ACAD00A64939 /* Preview Assets.xcassets in Resources */,
+				8DB3F29F2608BEDC00E278C6 /* InfoPlist.strings in Resources */,
 				8D543B8E252CA13600A64939 /* Localizable.strings in Resources */,
 				8D543B732529ACAD00A64939 /* Assets.xcassets in Resources */,
 			);
@@ -389,6 +393,14 @@
 				8D543B92252CA16E00A64939 /* ja */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		8DB3F2A12608BEDC00E278C6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8DB3F2A02608BEDC00E278C6 /* ja */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
