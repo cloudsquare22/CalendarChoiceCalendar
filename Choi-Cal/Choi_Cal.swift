@@ -207,14 +207,14 @@ struct MiddleView : View {
             }
             Text(entry.event.title)
                 .font(.footnote)
-            if entry.event.location.isEmpty == false {
-                HStack {
-                    Image(systemName: "location")
-                        .font(.footnote)
-                    Text(entry.event.location)
-                        .font(.footnote)
-                }
-            }
+//            if entry.event.location.isEmpty == false {
+//                HStack {
+//                    Image(systemName: "location")
+//                        .font(.footnote)
+//                    Text(entry.event.location)
+//                        .font(.footnote)
+//                }
+//            }
             if entry.event.isNoEvent == false && Date() <= entry.event.startDate {
                 Text(entry.event.startDate, style: .timer)
                     .font(.footnote)
