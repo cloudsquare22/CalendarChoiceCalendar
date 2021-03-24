@@ -133,39 +133,9 @@ struct Choi_CalEntryView : View {
                     .frame(width: geometry.size.width, height: 3, alignment: .center)
                 switch self.family {
                 case .systemSmall:
-                    VStack(alignment: .leading, spacing: 8.0) {
-                        if entry.event.isNoEvent == false {
-                            Text(entry.event.dispStartDate)
-                                .font(.footnote)
-                        }
-                        Text(entry.event.title)
-                            .font(.footnote)
-                        if entry.event.isNoEvent == false && Date() <= entry.event.startDate {
-                            Text(entry.event.startDate, style: .timer)
-                                .font(.footnote)
-                        }
-                    }
+                    SmallView(entry: self.entry)
                 case .systemMedium:
-                    VStack(alignment: .leading, spacing: 8.0) {
-                        if entry.event.isNoEvent == false {
-                            Text(entry.event.dispStartEndDate)
-                                .font(.footnote)
-                        }
-                        Text(entry.event.title)
-                            .font(.footnote)
-                        if entry.event.location.isEmpty == false {
-                            HStack {
-                                Image(systemName: "location")
-                                    .font(.footnote)
-                                Text(entry.event.location)
-                                    .font(.footnote)
-                            }
-                        }
-                        if entry.event.isNoEvent == false && Date() <= entry.event.startDate {
-                            Text(entry.event.startDate, style: .timer)
-                                .font(.footnote)
-                        }
-                    }
+                    MiddleView(entry: self.entry)
                 case .systemLarge:
                     Text("Large")
                 default:
@@ -204,6 +174,52 @@ struct Choi_Cal_Previews: PreviewProvider {
         }
 //        Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
 //            .previewContext(WidgetPreviewContext(family: .systemLarge))
+    }
+}
+
+struct SmallView : View {
+    let entry: Provider.Entry
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8.0) {
+            if entry.event.isNoEvent == false {
+                Text(entry.event.dispStartDate)
+                    .font(.footnote)
+            }
+            Text(entry.event.title)
+                .font(.footnote)
+            if entry.event.isNoEvent == false && Date() <= entry.event.startDate {
+                Text(entry.event.startDate, style: .timer)
+                    .font(.footnote)
+            }
+        }
+    }
+}
+
+struct MiddleView : View {
+    let entry: Provider.Entry
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8.0) {
+            if entry.event.isNoEvent == false {
+                Text(entry.event.dispStartEndDate)
+                    .font(.footnote)
+            }
+            Text(entry.event.title)
+                .font(.footnote)
+            if entry.event.location.isEmpty == false {
+                HStack {
+                    Image(systemName: "location")
+                        .font(.footnote)
+                    Text(entry.event.location)
+                        .font(.footnote)
+                }
+            }
+            if entry.event.isNoEvent == false && Date() <= entry.event.startDate {
+                Text(entry.event.startDate, style: .timer)
+                    .font(.footnote)
+            }
+        }
     }
 }
 
