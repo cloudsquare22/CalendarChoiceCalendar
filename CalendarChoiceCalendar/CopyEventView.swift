@@ -14,18 +14,22 @@ struct CopyEventView: View {
     @State var selection = 0
 
     var body: some View {
+        GeometryReader { geometry in
         VStack {
             Spacer()
             VStack(spacing: 4.0) {
                 Text(self.event.calendar.title)
                     .foregroundColor(Color(self.event.calendar.cgColor))
                     .font(.title2)
+                RoundedRectangle(cornerRadius: 3, style: .circular)
+                    .fill(Color(self.event.calendar.cgColor))
+                    .frame(width: geometry.size.width - 16, height: 3, alignment: .center)
                 Text(self.event.eventTitle)
                     .font(.title3)
                 Text(EventsModel.dateDisp(date: self.event.startDate, isAllDay: self.event.isAllDay))
                     .font(.title3)
             }
-//            Spacer()
+            Spacer()
             Picker(selection: self.$selection, label: Text("Calendar"), content: {
                 ForEach(0..<self.eventsModel.nextEvents.count) { index in
                     Text(self.eventsModel.nextEvents[index].calendar.title)
@@ -39,14 +43,14 @@ struct CopyEventView: View {
                 RoundedRectangle(cornerRadius: 16)
                               .stroke(Color.black, lineWidth: 1)
             )
-//            Spacer()
+            Spacer()
             Button(action: {
                 EventsModel.copyCalendar(eventDispModel: self.event, selectCalendar: self.eventsModel.nextEvents[self.selection].calendar)
                 self.presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Copy to calendar.")
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                    .padding(8)
+                    .padding(16)
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
                                       .stroke(Color.blue, lineWidth: 1)
@@ -55,6 +59,7 @@ struct CopyEventView: View {
             Spacer()
         }
         .padding(8)
+        }
     }
 }
 
