@@ -126,6 +126,7 @@ struct Choi_CalEntryView : View {
                     Spacer()
                     Text(entry.event.calenderTitle)
                         .font(.footnote)
+                        .lineLimit(1)
                     Spacer()
                 }
                 RoundedRectangle(cornerRadius: 3, style: .circular)
@@ -207,14 +208,16 @@ struct MiddleView : View {
             }
             Text(entry.event.title)
                 .font(.footnote)
-//            if entry.event.location.isEmpty == false {
-//                HStack {
-//                    Image(systemName: "location")
-//                        .font(.footnote)
-//                    Text(entry.event.location)
-//                        .font(.footnote)
-//                }
-//            }
+                .truncationMode(.middle)
+                .lineLimit(1)
+            if entry.event.location.isEmpty == false {
+                HStack {
+                    Image(systemName: "location")
+                        .font(.footnote)
+                    Text(entry.event.location)
+                        .font(.footnote)
+                }
+            }
             if entry.event.isNoEvent == false && Date() <= entry.event.startDate {
                 Text(entry.event.startDate, style: .timer)
                     .font(.footnote)
