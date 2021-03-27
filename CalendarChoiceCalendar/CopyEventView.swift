@@ -21,15 +21,18 @@ struct CopyEventView: View {
                 Text(self.event.calendar.title)
                     .foregroundColor(Color(self.event.calendar.cgColor))
                     .font(.title2)
+                    .padding(8.0)
                 RoundedRectangle(cornerRadius: 3, style: .circular)
                     .fill(Color(self.event.calendar.cgColor))
                     .frame(width: geometry.size.width - 16, height: 3, alignment: .center)
                 Text(self.event.eventTitle)
                     .font(.title3)
+                    .padding(8.0)
                 Text(EventsModel.dateDisp(date: self.event.startDate, isAllDay: self.event.isAllDay))
                     .font(.title3)
+                    .padding(8.0)
             }
-            Spacer()
+//            Spacer()
             Picker(selection: self.$selection, label: Text("Calendar"), content: {
                 ForEach(0..<self.eventsModel.nextEvents.count) { index in
                     Text(self.eventsModel.nextEvents[index].calendar.title)
@@ -43,12 +46,12 @@ struct CopyEventView: View {
                 RoundedRectangle(cornerRadius: 16)
                               .stroke(Color.black, lineWidth: 1)
             )
-            Spacer()
+//            Spacer()
             Button(action: {
                 EventsModel.copyCalendar(eventDispModel: self.event, selectCalendar: self.eventsModel.nextEvents[self.selection].calendar)
                 self.presentationMode.wrappedValue.dismiss()
             }, label: {
-                Text("Copy to calendar.")
+                Text("Copy to calendar")
                     .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
                     .padding(16)
                     .overlay(
@@ -56,6 +59,7 @@ struct CopyEventView: View {
                                       .stroke(Color.blue, lineWidth: 1)
                     )
             })
+            .padding(8.0)
             Spacer()
         }
         .padding(8)

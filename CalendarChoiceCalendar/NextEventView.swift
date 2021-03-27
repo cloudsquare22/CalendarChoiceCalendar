@@ -43,11 +43,7 @@ struct NextEventView: View {
                                     Spacer()
                                 }
                                 HStack {
-                                    Text("-")
-                                    Spacer()
-                                }
-                                HStack {
-                                    Text("No event.")
+                                    Text("No event")
                                     Spacer()
                                 }
                             }
