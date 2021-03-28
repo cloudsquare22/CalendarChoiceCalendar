@@ -184,7 +184,7 @@ struct SmallView : View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8.0) {
             if entry.event.isNoEvent == false {
-                Text(entry.event.dispStartDate)
+                Text(entry.event.dispStartEndDateShort)
                     .font(.footnote)
             }
             Text(entry.event.title)
@@ -248,6 +248,17 @@ class EventsModelWidget {
         dateFormatter.locale = .current
         let dateFormatterEnd = DateFormatter()
         dateFormatterEnd.dateFormat = "M/d H:mm"
+        dateFormatterEnd.locale = .current
+        return dateFormatter.string(from: self.startDate) +
+            dateFormatterEnd.string(from: self.endDate)
+    }
+
+    var dispStartEndDateShort: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/d H:mm〜"
+        dateFormatter.locale = .current
+        let dateFormatterEnd = DateFormatter()
+        dateFormatterEnd.dateFormat = "H:mm"
         dateFormatterEnd.locale = .current
         return dateFormatter.string(from: self.startDate) +
             dateFormatterEnd.string(from: self.endDate)
