@@ -116,6 +116,7 @@ struct SimpleEntry: TimelineEntry {
 }
 
 struct Choi_CalEntryView : View {
+    @Environment(\.widgetFamily) var family: WidgetFamily
     var entry: Provider.Entry
 
     var body: some View {
@@ -125,23 +126,23 @@ struct Choi_CalEntryView : View {
                     Spacer()
                     Text(entry.event.calenderTitle)
                         .font(.footnote)
+                        .lineLimit(1)
                     Spacer()
                 }
                 RoundedRectangle(cornerRadius: 3, style: .circular)
                     .fill(entry.event.calendarColor)
                     .frame(width: geometry.size.width, height: 3, alignment: .center)
-                VStack(alignment: .leading, spacing: 8.0) {
-                    if entry.event.isNoEvent == false {
-                        Text(entry.event.dispStartDate)
-                            .font(.footnote)
-                    }
-                    Text(entry.event.title)
-                        .font(.footnote)
-                    if entry.event.isNoEvent == false && Date() <= entry.event.startDate {
-                        Text(entry.event.startDate, style: .timer)
-                            .font(.footnote)
-                    }
+                switch self.family {
+                case .systemSmall:
+                    SmallView(entry: self.entry)
+                case .systemMedium:
+                    MiddleView(entry: self.entry)
+                case .systemLarge:
+                    Text("Large")
+                default:
+                    Text("default")
                 }
+                
             }
         }
         .padding(8)
@@ -158,7 +159,7 @@ struct Choi_Cal: Widget {
         }
         .configurationDisplayName("neCal")
         .description("Select the calendar for the next event.")
-        .supportedFamilies([.systemSmall])
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 
@@ -168,18 +169,68 @@ struct Choi_Cal_Previews: PreviewProvider {
         Group {
             Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
-
+            
+            Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
+                .previewContext(WidgetPreviewContext(family: .systemMedium))
         }
-//        Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
-//            .previewContext(WidgetPreviewContext(family: .systemMedium))
 //        Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
 //            .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }
 
+struct SmallView : View {
+    let entry: Provider.Entry
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8.0) {
+            if entry.event.isNoEvent == false {
+                Text(entry.event.dispStartDate)
+                    .font(.footnote)
+            }
+            Text(entry.event.title)
+                .font(.footnote)
+            if entry.event.isNoEvent == false && Date() <= entry.event.startDate {
+                Text(entry.event.startDate, style: .timer)
+                    .font(.footnote)
+            }
+        }
+    }
+}
+
+struct MiddleView : View {
+    let entry: Provider.Entry
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8.0) {
+            if entry.event.isNoEvent == false {
+                Text(entry.event.dispStartEndDate)
+                    .font(.footnote)
+            }
+            Text(entry.event.title)
+                .font(.footnote)
+                .truncationMode(.middle)
+                .lineLimit(1)
+            if entry.event.location.isEmpty == false {
+                HStack {
+                    Image(systemName: "location")
+                        .font(.footnote)
+                    Text(entry.event.location)
+                        .font(.footnote)
+                }
+            }
+            if entry.event.isNoEvent == false && Date() <= entry.event.startDate {
+                Text(entry.event.startDate, style: .timer)
+                    .font(.footnote)
+            }
+        }
+    }
+}
+
 class EventsModelWidget {
     var startDate: Date = Date()
+    var endDate: Date = Date()
     var title: String = "-"
+    var location: String = ""
     var calenderTitle: String = "-"
     var calendarColor: Color = .red
     var isNoEvent: Bool = false
@@ -190,11 +241,26 @@ class EventsModelWidget {
         dateFormatter.locale = .current
         return dateFormatter.string(from: self.startDate)
     }
-    
+
+    var dispStartEndDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "M/d H:mm〜"
+        dateFormatter.locale = .current
+        let dateFormatterEnd = DateFormatter()
+        dateFormatterEnd.dateFormat = "M/d H:mm"
+        dateFormatterEnd.locale = .current
+        return dateFormatter.string(from: self.startDate) +
+            dateFormatterEnd.string(from: self.endDate)
+    }
+
     static func cretate(eKEvent: EKEvent) -> EventsModelWidget {
         let event = EventsModelWidget()
         event.startDate = eKEvent.startDate
+        event.endDate = eKEvent.endDate
         event.title = eKEvent.title
+        if let location = eKEvent.location {
+            event.location = location
+        }
         event.calenderTitle = eKEvent.calendar.title
         event.calendarColor = Color(eKEvent.calendar.cgColor)
         return event

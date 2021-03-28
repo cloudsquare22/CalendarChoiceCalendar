@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  CalendarChoiceCalendar
+
+  Created by Shin Inaba on 2021/03/22.
+  
+*/
+
+"NSCalendarsUsageDescription" = "イベントを表示するために使用します。";

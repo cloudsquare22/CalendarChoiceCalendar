@@ -23,7 +23,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCalendarsUsageDescription</key>
-	<string>This is used to get the events to display.</string>
+	<string>It is used to display events.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>SelectCalendarIntent</string>

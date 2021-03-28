@@ -14,17 +14,26 @@ struct SettingView: View {
         NavigationView {
             List {
                 Section(header: Text("About")) {
-                    HStack {
-                        Spacer()
-                        VStack(){
+                    VStack {
+                        HStack {
+                            Spacer()
                             Image("neCal")
-                                .resizable()
-                                .scaledToFit()
-                            Text("neCal")
-                                .font(.largeTitle)
-                            Text("Version \(version)")
+                                .cornerRadius(16)
+                            Spacer()
+                            VStack(){
+                                Text("neCal")
+                                    .font(.largeTitle)
+                                Text("Version \(version)")
+                            }
+                            Spacer()
                         }
-                        Spacer()
+                        HStack {
+                            Spacer()
+                            Image("cloudsquare")
+                            Text("©️ 2021 cloudsquare.jp")
+                                .font(.footnote)
+                            Spacer()
+                        }
                     }
                 }
             }

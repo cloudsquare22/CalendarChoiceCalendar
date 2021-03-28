@@ -15,7 +15,7 @@ struct NextEventView: View {
             List {
                 ForEach(self.eventsModel.nextEvents) { event in
                     if event.isOn == true {
-                        if event.eventTitle != "" {
+                        if event.eventTitle.isEmpty == false {
                             NavigationLink(
                                 destination: EventListView(eventList: self.eventsModel.getEventList(calendars: [event.calendar]), title: event.calendar.title)) {
                                 VStack(alignment: .leading, spacing: 8.0) {
@@ -43,11 +43,7 @@ struct NextEventView: View {
                                     Spacer()
                                 }
                                 HStack {
-                                    Text("-")
-                                    Spacer()
-                                }
-                                HStack {
-                                    Text("No event.")
+                                    Text("No event")
                                     Spacer()
                                 }
                             }
