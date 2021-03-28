@@ -158,7 +158,7 @@ struct Choi_Cal: Widget {
             Choi_CalEntryView(entry: entry)
         }
         .configurationDisplayName("neCal")
-        .description("Select the calendar for the next event.")
+        .description(NSLocalizedString("Select the calendar to display.", comment: ""))
         .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
@@ -243,24 +243,18 @@ class EventsModelWidget {
     }
 
     var dispStartEndDate: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "M/d H:mm〜"
-        dateFormatter.locale = .current
         let dateFormatterEnd = DateFormatter()
         dateFormatterEnd.dateFormat = "M/d H:mm"
         dateFormatterEnd.locale = .current
-        return dateFormatter.string(from: self.startDate) +
+        return self.dispStartDate +
             dateFormatterEnd.string(from: self.endDate)
     }
 
     var dispStartEndDateShort: String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "M/d H:mm〜"
-        dateFormatter.locale = .current
         let dateFormatterEnd = DateFormatter()
         dateFormatterEnd.dateFormat = "H:mm"
         dateFormatterEnd.locale = .current
-        return dateFormatter.string(from: self.startDate) +
+        return self.dispStartDate +
             dateFormatterEnd.string(from: self.endDate)
     }
 
