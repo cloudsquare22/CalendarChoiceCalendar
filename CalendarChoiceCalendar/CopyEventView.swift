@@ -44,7 +44,7 @@ struct CopyEventView: View {
             .padding(8)
             .overlay(
                 RoundedRectangle(cornerRadius: 16)
-                              .stroke(Color.black, lineWidth: 1)
+                    .stroke(Color("blackAndWhite"), lineWidth: 1)
             )
 //            Spacer()
             Button(action: {
@@ -52,7 +52,7 @@ struct CopyEventView: View {
                 self.presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Copy to calendar")
-                    .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
+                    .font(.title2)
                     .padding(16)
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
