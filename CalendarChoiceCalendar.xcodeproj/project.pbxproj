@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8D25D248254447F200E9ACDD /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D25D247254447F200E9ACDD /* EventListView.swift */; };
+		8D2D6B952611FD24006787D0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8D543B90252CA13600A64939 /* Localizable.strings */; };
 		8D543B6F2529ACAC00A64939 /* CalendarChoiceCalendarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D543B6E2529ACAC00A64939 /* CalendarChoiceCalendarApp.swift */; };
 		8D543B712529ACAC00A64939 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D543B702529ACAC00A64939 /* ContentView.swift */; };
 		8D543B732529ACAD00A64939 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D543B722529ACAD00A64939 /* Assets.xcassets */; };
@@ -321,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D543BA3252D1A7A00A64939 /* Assets.xcassets in Resources */,
+				8D2D6B952611FD24006787D0 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
