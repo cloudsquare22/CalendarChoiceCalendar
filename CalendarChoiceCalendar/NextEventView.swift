@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import EventKit
 
 struct NextEventView: View {
     @EnvironmentObject var eventsModel: EventsModel
@@ -16,24 +17,7 @@ struct NextEventView: View {
                 ForEach(self.eventsModel.nextEvents) { event in
                     if event.isOn == true {
                         if event.eventTitle.isEmpty == false {
-                            NavigationLink(
-                                destination: EventListView(eventList: self.eventsModel.getEventList(calendars: [event.calendar]), title: event.calendar.title)) {
-                                VStack(alignment: .leading, spacing: 8.0) {
-                                    HStack {
-                                        Text(event.calendar.title)
-                                            .foregroundColor(Color(event.calendar.cgColor))
-                                        Spacer()
-                                    }
-                                    HStack {
-                                        Text(EventsModel.dateDisp(date: event.startDate, isAllDay: event.isAllDay))
-                                        Spacer()
-                                    }
-                                    HStack {
-                                        Text(event.eventTitle)
-                                        Spacer()
-                                    }
-                                }
-                            }
+                            EventView(event: event)
                         }
                         else {
                             VStack(alignment: .leading, spacing: 8.0) {
@@ -67,5 +51,31 @@ struct NextEventView_Previews: PreviewProvider {
     static var previews: some View {
         NextEventView()
             .environmentObject(EventsModel())
+    }
+}
+
+struct EventView: View {
+    @EnvironmentObject var eventsModel: EventsModel
+    let event: EventDispModel
+    
+    var body: some View {
+        NavigationLink(
+            destination: EventListView(eventList: self.eventsModel.getEventList(calendars: [self.event.calendar]), title: self.event.calendar.title)) {
+            VStack(alignment: .leading, spacing: 8.0) {
+                HStack {
+                    Text(self.event.calendar.title)
+                        .foregroundColor(Color(self.event.calendar.cgColor))
+                    Spacer()
+                }
+                HStack {
+                    Text(EventsModel.dateDisp(date: self.event.startDate, isAllDay: self.event.isAllDay))
+                    Spacer()
+                }
+                HStack {
+                    Text(self.event.eventTitle)
+                    Spacer()
+                }
+            }
+        }
     }
 }
