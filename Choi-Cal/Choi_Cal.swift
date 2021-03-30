@@ -151,7 +151,7 @@ struct Choi_CalEntryView : View {
 
 @main
 struct Choi_Cal: Widget {
-    let kind: String = "jp.cloudsquare.ios.CalendarChoiceCalendar.widget"
+    let kind: String = "jp.cloudsquare.ios.neCal.widget"
 
     var body: some WidgetConfiguration {
         IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in

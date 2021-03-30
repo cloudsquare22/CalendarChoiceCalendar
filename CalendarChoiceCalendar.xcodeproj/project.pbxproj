@@ -543,7 +543,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.cloudsquare.ios.CalendarChoiceCalendar;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.cloudsquare.ios.neCal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -567,7 +567,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jp.cloudsquare.ios.CalendarChoiceCalendar;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.cloudsquare.ios.neCal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -587,7 +587,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.cloudsquare.ios.CalendarChoiceCalendar.Choi-Cal";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.cloudsquare.ios.neCal.Choi-Cal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -608,7 +608,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "jp.cloudsquare.ios.CalendarChoiceCalendar.Choi-Cal";
+				PRODUCT_BUNDLE_IDENTIFIER = "jp.cloudsquare.ios.neCal.Choi-Cal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -628,7 +628,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jp.cloudsquare.ios.CalendarChoiceCalendar.CalendarIntent;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.cloudsquare.ios.neCal.CalendarIntent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -648,7 +648,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jp.cloudsquare.ios.CalendarChoiceCalendar.CalendarIntent;
+				PRODUCT_BUNDLE_IDENTIFIER = jp.cloudsquare.ios.neCal.CalendarIntent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
