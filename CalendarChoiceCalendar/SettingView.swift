@@ -19,12 +19,13 @@ struct SettingView: View {
                             Spacer()
                             Image("neCal")
                                 .cornerRadius(16)
-                            Spacer()
+                                .padding(8.0)
                             VStack(){
                                 Text("neCal")
                                     .font(.largeTitle)
                                 Text("Version \(version)")
                             }
+                            .padding(8.0)
                             Spacer()
                         }
                         HStack {
