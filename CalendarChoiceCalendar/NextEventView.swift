@@ -20,17 +20,7 @@ struct NextEventView: View {
                             EventView(event: event)
                         }
                         else {
-                            VStack(alignment: .leading, spacing: 8.0) {
-                                HStack {
-                                    Text(event.calendar.title)
-                                        .foregroundColor(Color(event.calendar.cgColor))
-                                    Spacer()
-                                }
-                                HStack {
-                                    Text("No event")
-                                    Spacer()
-                                }
-                            }
+                            EmptyEventView(event: event)
                         }
                     }
                 }
@@ -75,6 +65,24 @@ struct EventView: View {
                     Text(self.event.eventTitle)
                     Spacer()
                 }
+            }
+        }
+    }
+}
+
+struct EmptyEventView: View {
+    let event: EventDispModel
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8.0) {
+            HStack {
+                Text(self.event.calendar.title)
+                    .foregroundColor(Color(self.event.calendar.cgColor))
+                Spacer()
+            }
+            HStack {
+                Text("No event")
+                Spacer()
             }
         }
     }
