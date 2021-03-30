@@ -14,29 +14,7 @@ struct CalendarView: View {
         NavigationView {
             List {
                 ForEach(self.eventsModel.nextEvents) { nextEvent in
-                    HStack {
-                        Text(nextEvent.calendar.title)
-                            .foregroundColor(Color(nextEvent.calendar.cgColor))
-                        Spacer()
-                        if nextEvent.isOn == true {
-                            Image(systemName: "checkmark.square")
-                                .onTapGesture {
-                                    print("\(eventsModel.nextEvents[nextEvent.index].calendar.title) off")
-                                    eventsModel.nextEvents[nextEvent.index].isOn = false
-                                    self.eventsModel.updateOffCalendar()
-                                }
-                                .font(.title)
-                        }
-                        else {
-                            Image(systemName: "square")
-                                .onTapGesture {
-                                    print("\(eventsModel.nextEvents[nextEvent.index].calendar.title) on")
-                                    eventsModel.nextEvents[nextEvent.index].isOn = true
-                                    self.eventsModel.updateOffCalendar()
-                                }
-                                .font(.title)
-                        }
-                    }
+                    OneCalendarView(nextEvent: nextEvent)
                 }
             }
             .padding(8)
@@ -55,5 +33,36 @@ struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
         CalendarView()
             .environmentObject(EventsModel())
+    }
+}
+
+struct OneCalendarView: View {
+    @EnvironmentObject var eventsModel: EventsModel
+    let nextEvent: EventDispModel
+
+    var body: some View {
+        HStack {
+            Text(self.nextEvent.calendar.title)
+                .foregroundColor(Color(self.nextEvent.calendar.cgColor))
+            Spacer()
+            if self.nextEvent.isOn == true {
+                Image(systemName: "checkmark.square")
+                    .onTapGesture {
+                        print("\(eventsModel.nextEvents[self.nextEvent.index].calendar.title) off")
+                        eventsModel.nextEvents[self.nextEvent.index].isOn = false
+                        self.eventsModel.updateOffCalendar()
+                    }
+                    .font(.title)
+            }
+            else {
+                Image(systemName: "square")
+                    .onTapGesture {
+                        print("\(eventsModel.nextEvents[self.nextEvent.index].calendar.title) on")
+                        eventsModel.nextEvents[self.nextEvent.index].isOn = true
+                        self.eventsModel.updateOffCalendar()
+                    }
+                    .font(.title)
+            }
+        }
     }
 }
