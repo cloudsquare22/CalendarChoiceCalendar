@@ -27,7 +27,7 @@ struct NextEventView: View {
             }
             .padding(8)
             .navigationBarTitle("Next Event", displayMode: .inline)
-            .navigationBarItems(trailing: Image(systemName: "arrow.counterclockwise")
+            .navigationBarItems(trailing: Image(systemName: "arrow.triangle.2.circlepath")
                                     .foregroundColor(.blue)
                                     .onTapGesture {
                                         self.eventsModel.updateNextEvents()
