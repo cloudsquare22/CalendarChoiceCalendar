@@ -34,6 +34,11 @@ struct NextEventView: View {
                                     })
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .onOpenURL(perform: { url in
+            print(#function + ":\(url)")
+            let ekcalendar = self.eventsModel.getEKCakendar(urlCalenderTitle: url.absoluteString.replacingOccurrences(of: "necal://", with: ""))
+            print(ekcalendar)
+        })
     }
 }
 

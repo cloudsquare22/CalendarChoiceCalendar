@@ -47,6 +47,17 @@ class EventsModel: ObservableObject {
         self.nextEvents = self.getEventList(calendars: calendars, isOnce: true)
     }
     
+    func getEKCakendar(urlCalenderTitle: String) -> EKCalendar? {
+        var result :EKCalendar? = nil
+        let calendars = eventStore.calendars(for: .event)
+        for calendar in calendars {
+            if urlCalenderTitle == calendar.title.replacingOccurrences(of: " ", with: "_") {
+                result = calendar
+            }
+        }
+        return result
+    }
+    
     func updateOffCalendar() {
         offCalendar = []
         for event in nextEvents {

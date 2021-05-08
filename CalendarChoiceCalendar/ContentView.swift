@@ -35,6 +35,9 @@ struct ContentView: View {
                     }
                 }
             }
+            .onOpenURL(perform: { url in
+                print(#function + ":\(url)")
+            })
         }
     }
 

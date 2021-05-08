@@ -144,6 +144,7 @@ struct Choi_CalEntryView : View {
                 }
                 
             }
+            .widgetURL(self.entry.event.url)
         }
         .padding(8)
     }
@@ -234,6 +235,16 @@ class EventsModelWidget {
     var calenderTitle: String = "-"
     var calendarColor: Color = .red
     var isNoEvent: Bool = false
+    
+    var url: URL {
+        var result = URL(string: "necal://")!;
+        let urlCalenderTitle = self.calenderTitle.replacingOccurrences(of: " ", with: "_")
+        print("urlCalenderTitle:\(urlCalenderTitle)")
+        if let url = URL(string: "necal://\(urlCalenderTitle)") {
+            result = url
+        }
+        return result
+    }
     
     var dispStartDate: String {
         let dateFormatter = DateFormatter()
