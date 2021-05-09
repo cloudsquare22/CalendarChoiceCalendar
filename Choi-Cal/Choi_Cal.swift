@@ -235,12 +235,11 @@ class EventsModelWidget {
     var calenderTitle: String = "-"
     var calendarColor: Color = .red
     var isNoEvent: Bool = false
+    var calendarIdentifier: String = ""
     
     var url: URL {
         var result = URL(string: "necal://")!;
-        let urlCalenderTitle = self.calenderTitle.replacingOccurrences(of: " ", with: "_")
-        print("urlCalenderTitle:\(urlCalenderTitle)")
-        if let url = URL(string: "necal://\(urlCalenderTitle)") {
+        if let url = URL(string: "necal://\(self.calendarIdentifier)") {
             result = url
         }
         return result
@@ -279,6 +278,7 @@ class EventsModelWidget {
         }
         event.calenderTitle = eKEvent.calendar.title
         event.calendarColor = Color(eKEvent.calendar.cgColor)
+        event.calendarIdentifier = eKEvent.calendar.calendarIdentifier
         return event
     }
 }

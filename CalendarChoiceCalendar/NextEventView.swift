@@ -34,11 +34,6 @@ struct NextEventView: View {
                                     })
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .onOpenURL(perform: { url in
-            print(#function + ":\(url)")
-            let ekcalendar = self.eventsModel.getEKCakendar(urlCalenderTitle: url.absoluteString.replacingOccurrences(of: "necal://", with: ""))
-            print(ekcalendar)
-        })
     }
 }
 
@@ -51,11 +46,13 @@ struct NextEventView_Previews: PreviewProvider {
 
 struct EventView: View {
     @EnvironmentObject var eventsModel: EventsModel
+    @State var onEventList: Bool = false
     let event: EventDispModel
     
     var body: some View {
         NavigationLink(
-            destination: EventListView(eventList: self.eventsModel.getEventList(calendars: [self.event.calendar]), title: self.event.calendar.title)) {
+            destination: EventListView(eventList: self.eventsModel.getEventList(calendars: [self.event.calendar]), title: self.event.calendar.title),
+            isActive: self.$onEventList) {
             VStack(alignment: .leading, spacing: 8.0) {
                 HStack {
                     Text(self.event.calendar.title)
@@ -72,6 +69,15 @@ struct EventView: View {
                 }
             }
         }
+        .onOpenURL(perform: { url in
+//            print(#function + ":\(url)")
+            let ekcalendar = self.eventsModel.getEKCakendar(calendarIdentifier: url.absoluteString.replacingOccurrences(of: "necal://", with: ""))
+//            print(ekcalendar)
+            if event.calendar.calendarIdentifier == ekcalendar?.calendarIdentifier {
+                print("onOpenURL:\(event.calendar.title)")
+                self.onEventList.toggle()
+            }
+        })
     }
 }
 
