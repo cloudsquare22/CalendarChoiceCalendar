@@ -34,6 +34,9 @@ struct NextEventView: View {
                                     })
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .onOpenURL(perform: { url in
+            print(#function + ":\(url)")
+        })
     }
 }
 
@@ -69,15 +72,15 @@ struct EventView: View {
                 }
             }
         }
-        .onOpenURL(perform: { url in
-//            print(#function + ":\(url)")
-            let ekcalendar = self.eventsModel.getEKCakendar(calendarIdentifier: url.absoluteString.replacingOccurrences(of: "necal://", with: ""))
-//            print(ekcalendar)
-            if event.calendar.calendarIdentifier == ekcalendar?.calendarIdentifier {
-                print("onOpenURL:\(event.calendar.title)")
-                self.onEventList.toggle()
-            }
-        })
+//        .onOpenURL(perform: { url in
+////            print(#function + ":\(url)")
+//            let ekcalendar = self.eventsModel.getEKCakendar(calendarIdentifier: url.absoluteString.replacingOccurrences(of: "necal://", with: ""))
+////            print(ekcalendar)
+//            if event.calendar.calendarIdentifier == ekcalendar?.calendarIdentifier {
+//                print("onOpenURL:\(event.calendar.title)")
+//                self.onEventList.toggle()
+//            }
+//        })
     }
 }
 
