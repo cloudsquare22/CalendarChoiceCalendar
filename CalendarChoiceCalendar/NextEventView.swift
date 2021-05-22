@@ -10,6 +10,7 @@ import EventKit
 
 struct NextEventView: View {
     @EnvironmentObject var eventsModel: EventsModel
+    @State var openSheet: Bool = false
 
     var body: some View {
         NavigationView {
@@ -36,6 +37,10 @@ struct NextEventView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .onOpenURL(perform: { url in
             print(#function + ":\(url)")
+            self.openSheet.toggle()
+        })
+        .sheet(isPresented: self.$openSheet, content: {
+            Text("lalala")
         })
     }
 }
