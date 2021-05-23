@@ -11,6 +11,7 @@ import EventKit
 struct NextEventView: View {
     @EnvironmentObject var eventsModel: EventsModel
     @State var openSheet: Bool = false
+    @State var sheetCalendar: EKCalendar? = nil
 
     var body: some View {
         NavigationView {
@@ -37,10 +38,18 @@ struct NextEventView: View {
         .navigationViewStyle(StackNavigationViewStyle())
         .onOpenURL(perform: { url in
             print(#function + ":\(url)")
-            self.openSheet.toggle()
+            if url.absoluteString != "necal://" {
+                self.sheetCalendar = self.eventsModel.getEKCakendar(calendarIdentifier: url.absoluteString.replacingOccurrences(of: "necal://", with: ""))
+                self.openSheet.toggle()
+            }
         })
         .sheet(isPresented: self.$openSheet, content: {
-            Text("lalala")
+            if let calendar = self.sheetCalendar {
+                NavigationView {
+                    EventListView(eventList: self.eventsModel.getEventList(calendars: [calendar]), title: calendar.title)
+
+                }
+            }
         })
     }
 }
