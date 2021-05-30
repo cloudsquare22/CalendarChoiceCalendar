@@ -36,21 +36,6 @@ struct NextEventView: View {
                                     })
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .onOpenURL(perform: { url in
-            print(#function + ":\(url)")
-            if url.absoluteString != "necal://" {
-                self.sheetCalendar = self.eventsModel.getEKCakendar(calendarIdentifier: url.absoluteString.replacingOccurrences(of: "necal://", with: ""))
-                self.openSheet.toggle()
-            }
-        })
-        .sheet(isPresented: self.$openSheet, content: {
-            if let calendar = self.sheetCalendar {
-                NavigationView {
-                    EventListView(eventList: self.eventsModel.getEventList(calendars: [calendar]), title: calendar.title)
-
-                }
-            }
-        })
     }
 }
 

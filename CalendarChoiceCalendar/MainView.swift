@@ -7,10 +7,13 @@
 
 import SwiftUI
 import WidgetKit
+import EventKit
 
 struct MainView: View {
     @EnvironmentObject var eventsModel: EventsModel
     @State private var selection = 1
+    @State var openSheet: Bool = false
+    @State var sheetCalendar: EKCalendar? = nil
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
@@ -34,6 +37,21 @@ struct MainView: View {
                 }
                 .tag(2)
         }
+        .onOpenURL(perform: { url in
+            print(#function + ":\(url)")
+            if url.absoluteString != "necal://" {
+                self.sheetCalendar = self.eventsModel.getEKCakendar(calendarIdentifier: url.absoluteString.replacingOccurrences(of: "necal://", with: ""))
+                self.openSheet.toggle()
+            }
+        })
+        .sheet(isPresented: self.$openSheet, content: {
+            if let calendar = self.sheetCalendar {
+                NavigationView {
+                    EventListView(eventList: self.eventsModel.getEventList(calendars: [calendar]), title: calendar.title)
+
+                }
+            }
+        })
         .onChange(of: scenePhase) { phase in
             print("Scene:\(phase)")
             switch(phase) {
