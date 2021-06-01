@@ -20,20 +20,17 @@ struct MainView: View {
         TabView(selection: $selection) {
             CalendarView()
                 .tabItem {
-                    Image(systemName: "calendar")
-                    Text("Calendar")
+                    Label("Calendar", systemImage: "calendar")
                 }
                 .tag(0)
             NextEventView()
                 .tabItem {
-                    Image(systemName: "deskclock")
-                    Text("Next Event")
+                    Label("Next Event", systemImage: "deskclock")
                 }
                 .tag(1)
             SettingView()
                 .tabItem {
-                    Image(systemName: "gear")
-                    Text("Setting")
+                    Label("Setting", systemImage: "gear")
                 }
                 .tag(2)
         }
