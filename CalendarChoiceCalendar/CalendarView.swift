@@ -17,8 +17,9 @@ struct CalendarView: View {
                     OneCalendarView(nextEvent: nextEvent)
                 }
             }
-            .padding(8)
-            .navigationBarTitle("Calendar", displayMode: .inline)
+//            .padding(8)
+            .navigationTitle("Calendar")
+            .navigationBarTitleDisplayMode(.large)
             .navigationBarItems(trailing: Image(systemName: "arrow.triangle.2.circlepath")
                                     .foregroundColor(.blue)
                                     .onTapGesture {

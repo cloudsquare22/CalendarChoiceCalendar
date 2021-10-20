@@ -39,7 +39,8 @@ struct SettingView: View {
                 }
             }
 //            .padding(8)
-            .navigationBarTitle("Setting", displayMode: .inline)
+            .navigationTitle("Setting")
+            .navigationBarTitleDisplayMode(.large)
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }

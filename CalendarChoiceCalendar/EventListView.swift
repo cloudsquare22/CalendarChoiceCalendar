@@ -22,10 +22,12 @@ struct EventListView: View {
                     }, label: {
                         HStack {
                             Text(EventsModel.dateDisp(date: event.startDate, isAllDay: event.isAllDay))
+                                .foregroundColor(.primary)
                             Spacer()
                         }
                         HStack {
                             Text(event.eventTitle)
+                                .foregroundColor(.primary)
                             Spacer()
                         }
                     })
@@ -35,8 +37,8 @@ struct EventListView: View {
                 })
             }
         }
-        .padding(8)
-        .navigationBarTitle(title, displayMode: .inline)
+//        .padding(8)
+        .navigationTitle(self.title)
     }
 }
 

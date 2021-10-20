@@ -27,8 +27,9 @@ struct NextEventView: View {
                     }
                 }
             }
-            .padding(8)
-            .navigationBarTitle("Next Event", displayMode: .inline)
+//            .padding(8)
+            .navigationTitle("Next Event")
+            .navigationBarTitleDisplayMode(.large)
             .navigationBarItems(trailing: Image(systemName: "arrow.triangle.2.circlepath")
                                     .foregroundColor(.blue)
                                     .onTapGesture {
