@@ -27,6 +27,7 @@ struct NextEventView: View {
                     }
                 }
             }
+            .listStyle(PlainListStyle())
 //            .padding(8)
             .navigationTitle("Next Event")
             .navigationBarTitleDisplayMode(.large)

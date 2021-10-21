@@ -38,6 +38,7 @@ struct SettingView: View {
                     }
                 }
             }
+            .listStyle(PlainListStyle())
 //            .padding(8)
             .navigationTitle("Setting")
             .navigationBarTitleDisplayMode(.large)

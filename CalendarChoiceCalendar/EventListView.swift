@@ -37,6 +37,7 @@ struct EventListView: View {
                 })
             }
         }
+        .listStyle(PlainListStyle())
 //        .padding(8)
         .navigationTitle(self.title)
     }

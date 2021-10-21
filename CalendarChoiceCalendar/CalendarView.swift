@@ -17,6 +17,7 @@ struct CalendarView: View {
                     OneCalendarView(nextEvent: nextEvent)
                 }
             }
+            .listStyle(PlainListStyle())
 //            .padding(8)
             .navigationTitle("Calendar")
             .navigationBarTitleDisplayMode(.large)
