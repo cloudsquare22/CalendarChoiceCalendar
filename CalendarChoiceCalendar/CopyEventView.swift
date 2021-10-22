@@ -41,6 +41,7 @@ struct CopyEventView: View {
                             .padding()
                     }
                 })
+                .pickerStyle(WheelPickerStyle())
                 .padding(8)
                 .overlay(
                     RoundedRectangle(cornerRadius: 16)
