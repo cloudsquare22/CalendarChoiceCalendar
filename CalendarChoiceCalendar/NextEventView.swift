@@ -15,27 +15,52 @@ struct NextEventView: View {
 
     var body: some View {
         NavigationView {
-            List {
-                ForEach(self.eventsModel.nextEvents) { event in
-                    if event.isOn == true {
-                        if event.eventTitle.isEmpty == false {
-                            EventView(event: event)
-                        }
-                        else {
-                            EmptyEventView(event: event)
+            if #available(iOS 15.0, *) {
+                List {
+                    ForEach(self.eventsModel.nextEvents) { event in
+                        if event.isOn == true {
+                            if event.eventTitle.isEmpty == false {
+                                EventView(event: event)
+                            }
+                            else {
+                                EmptyEventView(event: event)
+                            }
                         }
                     }
                 }
+                .listStyle(PlainListStyle())
+                .refreshable {
+                    self.eventsModel.updateNextEvents()
+                }
+                .navigationTitle("Next Event")
+                .navigationBarTitleDisplayMode(.large)
+                .navigationBarItems(trailing: Image(systemName: "arrow.triangle.2.circlepath")
+                                        .foregroundColor(.blue)
+                                        .onTapGesture {
+                    self.eventsModel.updateNextEvents()
+                })
+            } else {
+                List {
+                    ForEach(self.eventsModel.nextEvents) { event in
+                        if event.isOn == true {
+                            if event.eventTitle.isEmpty == false {
+                                EventView(event: event)
+                            }
+                            else {
+                                EmptyEventView(event: event)
+                            }
+                        }
+                    }
+                }
+                .listStyle(PlainListStyle())
+                .navigationTitle("Next Event")
+                .navigationBarTitleDisplayMode(.large)
+                .navigationBarItems(trailing: Image(systemName: "arrow.triangle.2.circlepath")
+                                        .foregroundColor(.blue)
+                                        .onTapGesture {
+                    self.eventsModel.updateNextEvents()
+                })
             }
-            .listStyle(PlainListStyle())
-//            .padding(8)
-            .navigationTitle("Next Event")
-            .navigationBarTitleDisplayMode(.large)
-            .navigationBarItems(trailing: Image(systemName: "arrow.triangle.2.circlepath")
-                                    .foregroundColor(.blue)
-                                    .onTapGesture {
-                                        self.eventsModel.updateNextEvents()
-                                    })
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
