@@ -43,7 +43,8 @@ struct NextEventView: View {
                                         .onTapGesture {
                     self.eventsModel.updateNextEvents()
                 })
-            } else {
+            }
+            else {
                 List {
                     ForEachEventDispModel()
                 }

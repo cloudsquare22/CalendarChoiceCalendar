@@ -10,22 +10,43 @@ import SwiftUI
 struct CalendarView: View {
     @EnvironmentObject var eventsModel: EventsModel
 
+    fileprivate func ForEachEventDispModel() -> ForEach<[EventDispModel], UUID, OneCalendarView> {
+        return ForEach(self.eventsModel.nextEvents) { nextEvent in
+            OneCalendarView(nextEvent: nextEvent)
+        }
+    }
+    
     var body: some View {
         NavigationView {
-            List {
-                ForEach(self.eventsModel.nextEvents) { nextEvent in
-                    OneCalendarView(nextEvent: nextEvent)
+            if #available(iOS 15.0, *) {
+                List {
+                    ForEachEventDispModel()
                 }
+                .refreshable {
+                    self.eventsModel.updateNextEvents()
+                }
+                .listStyle(PlainListStyle())
+                .navigationTitle("Calendar")
+                .navigationBarTitleDisplayMode(.large)
+                .navigationBarItems(trailing: Image(systemName: "arrow.triangle.2.circlepath")
+                                        .foregroundColor(.blue)
+                                        .onTapGesture {
+                    self.eventsModel.updateNextEvents()
+                })
             }
-            .listStyle(PlainListStyle())
-//            .padding(8)
-            .navigationTitle("Calendar")
-            .navigationBarTitleDisplayMode(.large)
-            .navigationBarItems(trailing: Image(systemName: "arrow.triangle.2.circlepath")
-                                    .foregroundColor(.blue)
-                                    .onTapGesture {
-                                        self.eventsModel.updateNextEvents()
-                                    })
+            else {
+                List {
+                    ForEachEventDispModel()
+                }
+                .listStyle(PlainListStyle())
+                .navigationTitle("Calendar")
+                .navigationBarTitleDisplayMode(.large)
+                .navigationBarItems(trailing: Image(systemName: "arrow.triangle.2.circlepath")
+                                        .foregroundColor(.blue)
+                                        .onTapGesture {
+                    self.eventsModel.updateNextEvents()
+                })
+            }
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
