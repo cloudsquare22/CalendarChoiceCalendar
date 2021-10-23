@@ -13,20 +13,24 @@ struct NextEventView: View {
     @State var openSheet: Bool = false
     @State var sheetCalendar: EKCalendar? = nil
 
+    fileprivate func ForEachEventDispModel() -> ForEach<[EventDispModel], UUID, _ConditionalContent<EventView, EmptyEventView>?> {
+        return ForEach(self.eventsModel.nextEvents) { event in
+            if event.isOn == true {
+                if event.eventTitle.isEmpty == false {
+                    EventView(event: event)
+                }
+                else {
+                    EmptyEventView(event: event)
+                }
+            }
+        }
+    }
+    
     var body: some View {
         NavigationView {
             if #available(iOS 15.0, *) {
                 List {
-                    ForEach(self.eventsModel.nextEvents) { event in
-                        if event.isOn == true {
-                            if event.eventTitle.isEmpty == false {
-                                EventView(event: event)
-                            }
-                            else {
-                                EmptyEventView(event: event)
-                            }
-                        }
-                    }
+                    ForEachEventDispModel()
                 }
                 .listStyle(PlainListStyle())
                 .refreshable {
@@ -41,16 +45,7 @@ struct NextEventView: View {
                 })
             } else {
                 List {
-                    ForEach(self.eventsModel.nextEvents) { event in
-                        if event.isOn == true {
-                            if event.eventTitle.isEmpty == false {
-                                EventView(event: event)
-                            }
-                            else {
-                                EmptyEventView(event: event)
-                            }
-                        }
-                    }
+                    ForEachEventDispModel()
                 }
                 .listStyle(PlainListStyle())
                 .navigationTitle("Next Event")
