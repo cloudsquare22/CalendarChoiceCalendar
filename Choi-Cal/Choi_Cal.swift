@@ -138,7 +138,9 @@ struct Choi_CalEntryView : View {
                 case .systemMedium:
                     MiddleView(entry: self.entry)
                 case .systemLarge:
-                    Text("Large")
+                    LargeView(entry: self.entry)
+                case .systemExtraLarge:
+                    Text("System Large")
                 default:
                     Text("default")
                 }
@@ -160,7 +162,7 @@ struct Choi_Cal: Widget {
         }
         .configurationDisplayName("neCal")
         .description(NSLocalizedString("Select the calendar to display.", comment: ""))
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }
 
@@ -173,9 +175,17 @@ struct Choi_Cal_Previews: PreviewProvider {
             
             Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
+
+            Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
+
+            if #available(iOSApplicationExtension 15.0, *) {
+                Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
+                    .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
+            } else {
+                // Fallback on earlier versions
+            }
         }
-//        Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
-//            .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }
 
@@ -226,6 +236,15 @@ struct MiddleView : View {
         }
     }
 }
+
+struct LargeView : View {
+    let entry: Provider.Entry
+
+    var body: some View {
+        Text("Large")
+    }
+}
+
 
 class EventsModelWidget {
     var startDate: Date = Date()
