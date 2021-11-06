@@ -162,7 +162,7 @@ struct Choi_Cal: Widget {
         }
         .configurationDisplayName("neCal")
         .description(NSLocalizedString("Select the calendar to display.", comment: ""))
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .supportedFamilies([.systemSmall, .systemMedium])
     }
 }
 

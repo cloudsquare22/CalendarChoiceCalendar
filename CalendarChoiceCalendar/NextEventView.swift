@@ -84,10 +84,12 @@ struct EventView: View {
                 }
                 HStack {
                     Text(EventsModel.dateDisp(date: self.event.startDate, isAllDay: self.event.isAllDay))
+                        .padding(.leading)
                     Spacer()
                 }
                 HStack {
                     Text(self.event.eventTitle)
+                        .padding(.leading)
                     Spacer()
                 }
             }

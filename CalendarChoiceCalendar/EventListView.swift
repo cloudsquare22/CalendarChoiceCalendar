@@ -32,6 +32,7 @@ struct EventListView: View {
                         }
                     })
                 }
+                .listRowInsets(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
                 .sheet(isPresented: self.$copyEvent, content: {
                     CopyEventView(event: event).environmentObject(self.eventsModel)
                 })
