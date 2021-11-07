@@ -27,6 +27,7 @@ struct EventListView: View {
                         }
                         HStack {
                             Text(event.eventTitle)
+                                .padding(.leading)
                                 .foregroundColor(.primary)
                             Spacer()
                         }
