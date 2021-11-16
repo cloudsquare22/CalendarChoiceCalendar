@@ -16,6 +16,16 @@ struct CopyEventView: View {
     var body: some View {
         GeometryReader { geometry in
             VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image(systemName: "xmark.circle")
+                            .font(.largeTitle)
+                    })
+                }
+                .padding(8)
                 Spacer()
                 VStack(spacing: 4.0) {
                     Text(self.event.calendar.title)
