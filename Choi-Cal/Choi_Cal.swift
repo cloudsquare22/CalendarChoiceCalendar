@@ -20,7 +20,7 @@ struct Provider: IntentTimelineProvider {
         event.title = "Event xxx"
         event.calenderTitle = "Calendar xxx"
         event.calendarColor = .red
-        return SimpleEntry(date: Date(), event: event, configuration: ConfigurationIntent())
+        return SimpleEntry(date: Date(), events: [event], configuration: ConfigurationIntent())
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
@@ -31,7 +31,7 @@ struct Provider: IntentTimelineProvider {
         if eKEvents.count > 0 {
             event = EventsModelWidget.cretate(eKEvent: eKEvents[0])
         }
-        let entry = SimpleEntry(date: Date(), event: event, configuration: configuration)
+        let entry = SimpleEntry(date: Date(), events: [event], configuration: configuration)
         completion(entry)
     }
 
@@ -50,7 +50,7 @@ struct Provider: IntentTimelineProvider {
         if eKEvents.count > 0 {
             for eKEvent in eKEvents {
                 let event = EventsModelWidget.cretate(eKEvent: eKEvent)
-                let entry = SimpleEntry(date: nextDate, event: event, configuration: configuration)
+                let entry = SimpleEntry(date: nextDate, events: [event], configuration: configuration)
                 entries.append(entry)
                 nextDate = eKEvent.startDate
                 if entries.count >= 2 {
@@ -69,7 +69,7 @@ struct Provider: IntentTimelineProvider {
             if selectCalendars.count > 0 {
                 event.calendarColor = Color(selectCalendars[0].cgColor)
             }
-            let entry = SimpleEntry(date: Date(), event: event, configuration: configuration)
+            let entry = SimpleEntry(date: Date(), events: [event], configuration: configuration)
             entries.append(entry)
             timelineReloadPolicy = .after(Date() + 3600)
         }
@@ -111,7 +111,7 @@ struct Provider: IntentTimelineProvider {
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
-    let event: EventsModelWidget
+    let events: [EventsModelWidget]
     let configuration: ConfigurationIntent
 }
 
@@ -124,13 +124,13 @@ struct Choi_CalEntryView : View {
             VStack(alignment: .leading) {
                 HStack {
                     Spacer()
-                    Text(entry.event.calenderTitle)
+                    Text(entry.events[0].calenderTitle)
                         .font(.footnote)
                         .lineLimit(1)
                     Spacer()
                 }
                 RoundedRectangle(cornerRadius: 3, style: .circular)
-                    .fill(entry.event.calendarColor)
+                    .fill(entry.events[0].calendarColor)
                     .frame(width: geometry.size.width, height: 3, alignment: .center)
                 switch self.family {
                 case .systemSmall:
@@ -146,7 +146,7 @@ struct Choi_CalEntryView : View {
                 }
                 
             }
-            .widgetURL(self.entry.event.url)
+            .widgetURL(self.entry.events[0].url)
         }
         .padding(8)
     }
@@ -170,17 +170,17 @@ struct Choi_Cal_Previews: PreviewProvider {
     static let event = EventsModelWidget()
     static var previews: some View {
         Group {
-            Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
+            Choi_CalEntryView(entry: SimpleEntry(date: Date(), events: [Choi_Cal_Previews.event], configuration: ConfigurationIntent()))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
             
-            Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
+            Choi_CalEntryView(entry: SimpleEntry(date: Date(), events: [Choi_Cal_Previews.event], configuration: ConfigurationIntent()))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
 
-            Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
+            Choi_CalEntryView(entry: SimpleEntry(date: Date(), events: [Choi_Cal_Previews.event], configuration: ConfigurationIntent()))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
 
             if #available(iOSApplicationExtension 15.0, *) {
-                Choi_CalEntryView(entry: SimpleEntry(date: Date(), event: Choi_Cal_Previews.event, configuration: ConfigurationIntent()))
+                Choi_CalEntryView(entry: SimpleEntry(date: Date(), events: [Choi_Cal_Previews.event], configuration: ConfigurationIntent()))
                     .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
             } else {
                 // Fallback on earlier versions
@@ -194,14 +194,14 @@ struct SmallView : View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8.0) {
-            if entry.event.isNoEvent == false {
-                Text(entry.event.dispStartEndDateShort)
+            if entry.events[0].isNoEvent == false {
+                Text(entry.events[0].dispStartEndDateShort)
                     .font(.footnote)
             }
-            Text(entry.event.title)
+            Text(entry.events[0].title)
                 .font(.footnote)
-            if entry.event.isNoEvent == false && Date() <= entry.event.startDate {
-                Text(entry.event.startDate, style: .timer)
+            if entry.events[0].isNoEvent == false && Date() <= entry.events[0].startDate {
+                Text(entry.events[0].startDate, style: .timer)
                     .font(.footnote)
             }
         }
@@ -213,24 +213,24 @@ struct MiddleView : View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8.0) {
-            if entry.event.isNoEvent == false {
-                Text(entry.event.dispStartEndDate)
+            if entry.events[0].isNoEvent == false {
+                Text(entry.events[0].dispStartEndDate)
                     .font(.footnote)
             }
-            Text(entry.event.title)
+            Text(entry.events[0].title)
                 .font(.footnote)
                 .truncationMode(.middle)
                 .lineLimit(1)
-            if entry.event.location.isEmpty == false {
+            if entry.events[0].location.isEmpty == false {
                 HStack {
                     Image(systemName: "location")
                         .font(.footnote)
-                    Text(entry.event.location)
+                    Text(entry.events[0].location)
                         .font(.footnote)
                 }
             }
-            if entry.event.isNoEvent == false && Date() <= entry.event.startDate {
-                Text(entry.event.startDate, style: .timer)
+            if entry.events[0].isNoEvent == false && Date() <= entry.events[0].startDate {
+                Text(entry.events[0].startDate, style: .timer)
                     .font(.footnote)
             }
         }
