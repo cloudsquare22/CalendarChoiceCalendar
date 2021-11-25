@@ -270,52 +270,52 @@ struct LargeView : View {
     let entry: Provider.Entry
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8.0) {
-            if entry.events[0].isNoEvent == false {
-                Text(entry.events[0].dispStartEndDate)
-                    .font(.footnote)
-            }
-            Text(entry.events[0].title)
-                .font(.footnote)
-                .truncationMode(.middle)
-                .lineLimit(1)
-            if entry.events[0].location.isEmpty == false {
-                HStack {
-                    Image(systemName: "location")
-                        .font(.footnote)
-                    Text(entry.events[0].location)
-                        .font(.footnote)
+        GeometryReader { geometry in
+            VStack(alignment: .leading, spacing: 8.0) {
+                LargeViewCell(event: entry.events[0])
+                if entry.events.count > 1 {
+                    RoundedRectangle(cornerRadius: 3, style: .circular)
+                        .fill(.gray)
+                        .frame(width: geometry.size.width, height: 1, alignment: .center)
+                    LargeViewCell(event: entry.events[1])
                 }
-            }
-            if entry.events[0].isNoEvent == false && Date() <= entry.events[0].startDate {
-                Text(entry.events[0].startDate, style: .timer)
-                    .font(.footnote)
-            }
-
-            if entry.events[1].isNoEvent == false {
-                Text(entry.events[1].dispStartEndDate)
-                    .font(.footnote)
-            }
-            Text(entry.events[1].title)
-                .font(.footnote)
-                .truncationMode(.middle)
-                .lineLimit(1)
-            if entry.events[1].location.isEmpty == false {
-                HStack {
-                    Image(systemName: "location")
-                        .font(.footnote)
-                    Text(entry.events[1].location)
-                        .font(.footnote)
+                if entry.events.count > 1 {
+                    RoundedRectangle(cornerRadius: 3, style: .circular)
+                        .fill(.gray)
+                        .frame(width: geometry.size.width, height: 1, alignment: .center)
+                    LargeViewCell(event: entry.events[1])
                 }
-            }
-            if entry.events[1].isNoEvent == false && Date() <= entry.events[1].startDate {
-                Text(entry.events[1].startDate, style: .timer)
-                    .font(.footnote)
             }
         }
     }
 }
 
+struct LargeViewCell : View {
+    var event: EventsModelWidget
+    
+    var body: some View {
+        if event.isNoEvent == false {
+            Text(event.dispStartEndDate)
+                .font(.footnote)
+        }
+        Text(event.title)
+            .font(.footnote)
+            .truncationMode(.middle)
+            .lineLimit(1)
+        if event.location.isEmpty == false {
+            HStack {
+                Image(systemName: "location")
+                    .font(.footnote)
+                Text(event.location)
+                    .font(.footnote)
+            }
+        }
+        if event.isNoEvent == false && Date() <= event.startDate {
+            Text(event.startDate, style: .timer)
+                .font(.footnote)
+        }
+    }
+}
 
 class EventsModelWidget {
     var startDate: Date = Date()
