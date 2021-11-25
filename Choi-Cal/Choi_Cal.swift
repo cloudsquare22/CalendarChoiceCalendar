@@ -47,21 +47,9 @@ struct Provider: IntentTimelineProvider {
         let eKEvents = getEvents(selectCalendars: selectCalendars)
         var nextDate = Date()
         var timelineReloadPolicy: TimelineReloadPolicy = .atEnd
-        if eKEvents.count > 0 {
-            for eKEvent in eKEvents {
-                let event = EventsModelWidget.cretate(eKEvent: eKEvent)
-                let entry = SimpleEntry(date: nextDate, events: [event], configuration: configuration)
-                entries.append(entry)
-                nextDate = eKEvent.startDate
-                if entries.count >= 2 {
-                    break
-                }
-            }
-            if entries[entries.count - 1].date > (Date() + 3600) {
-                timelineReloadPolicy = .after(Date() + 3600)
-            }
-        }
-        else {
+
+        switch(eKEvents.count) {
+        case 0:
             let event = EventsModelWidget()
             event.isNoEvent = true
             event.title = "No Next Event"
@@ -72,7 +60,48 @@ struct Provider: IntentTimelineProvider {
             let entry = SimpleEntry(date: Date(), events: [event], configuration: configuration)
             entries.append(entry)
             timelineReloadPolicy = .after(Date() + 3600)
+            break
+        case 1:
+            break
+        case 2:
+            break
+        default:
+            let event1 = EventsModelWidget.cretate(eKEvent: eKEvents[0])
+            let event2 = EventsModelWidget.cretate(eKEvent: eKEvents[1])
+            let event3 = EventsModelWidget.cretate(eKEvent: eKEvents[2])
+            entries.append(SimpleEntry(date: nextDate, events: [event1, event2], configuration: configuration))
+            entries.append(SimpleEntry(date: event1.startDate, events: [event2, event3], configuration: configuration))
+            if entries[entries.count - 1].date > (Date() + 3600) {
+                timelineReloadPolicy = .after(Date() + 3600)
+            }
         }
+                
+//        if eKEvents.count > 0 {
+//            for eKEvent in eKEvents {
+//                let event = EventsModelWidget.cretate(eKEvent: eKEvent)
+//                let entry = SimpleEntry(date: nextDate, events: [event], configuration: configuration)
+//                entries.append(entry)
+//                nextDate = eKEvent.startDate
+//                if entries.count >= 2 {
+//                    break
+//                }
+//            }
+//            if entries[entries.count - 1].date > (Date() + 3600) {
+//                timelineReloadPolicy = .after(Date() + 3600)
+//            }
+//        }
+//        else {
+//            let event = EventsModelWidget()
+//            event.isNoEvent = true
+//            event.title = "No Next Event"
+//            event.calenderTitle = configuration.calendar?.displayString ?? "No select"
+//            if selectCalendars.count > 0 {
+//                event.calendarColor = Color(selectCalendars[0].cgColor)
+//            }
+//            let entry = SimpleEntry(date: Date(), events: [event], configuration: configuration)
+//            entries.append(entry)
+//            timelineReloadPolicy = .after(Date() + 3600)
+//        }
         print(entries)
         let timeline = Timeline(entries: entries, policy: timelineReloadPolicy)
         completion(timeline)
@@ -162,7 +191,7 @@ struct Choi_Cal: Widget {
         }
         .configurationDisplayName("neCal")
         .description(NSLocalizedString("Select the calendar to display.", comment: ""))
-        .supportedFamilies([.systemSmall, .systemMedium])
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }
 
@@ -241,7 +270,49 @@ struct LargeView : View {
     let entry: Provider.Entry
 
     var body: some View {
-        Text("Large")
+        VStack(alignment: .leading, spacing: 8.0) {
+            if entry.events[0].isNoEvent == false {
+                Text(entry.events[0].dispStartEndDate)
+                    .font(.footnote)
+            }
+            Text(entry.events[0].title)
+                .font(.footnote)
+                .truncationMode(.middle)
+                .lineLimit(1)
+            if entry.events[0].location.isEmpty == false {
+                HStack {
+                    Image(systemName: "location")
+                        .font(.footnote)
+                    Text(entry.events[0].location)
+                        .font(.footnote)
+                }
+            }
+            if entry.events[0].isNoEvent == false && Date() <= entry.events[0].startDate {
+                Text(entry.events[0].startDate, style: .timer)
+                    .font(.footnote)
+            }
+
+            if entry.events[1].isNoEvent == false {
+                Text(entry.events[1].dispStartEndDate)
+                    .font(.footnote)
+            }
+            Text(entry.events[1].title)
+                .font(.footnote)
+                .truncationMode(.middle)
+                .lineLimit(1)
+            if entry.events[1].location.isEmpty == false {
+                HStack {
+                    Image(systemName: "location")
+                        .font(.footnote)
+                    Text(entry.events[1].location)
+                        .font(.footnote)
+                }
+            }
+            if entry.events[1].isNoEvent == false && Date() <= entry.events[1].startDate {
+                Text(entry.events[1].startDate, style: .timer)
+                    .font(.footnote)
+            }
+        }
     }
 }
 
