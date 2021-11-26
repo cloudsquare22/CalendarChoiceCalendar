@@ -60,17 +60,36 @@ struct Provider: IntentTimelineProvider {
             let entry = SimpleEntry(date: Date(), events: [event], configuration: configuration)
             entries.append(entry)
             timelineReloadPolicy = .after(Date() + 3600)
-            break
         case 1:
-            break
+            let event1 = EventsModelWidget.cretate(eKEvent: eKEvents[0])
+            entries.append(SimpleEntry(date: nextDate, events: [event1], configuration: configuration))
+            if entries[entries.count - 1].date > (Date() + 3600) {
+                timelineReloadPolicy = .after(Date() + 3600)
+            }
         case 2:
-            break
+            let event1 = EventsModelWidget.cretate(eKEvent: eKEvents[0])
+            let event2 = EventsModelWidget.cretate(eKEvent: eKEvents[1])
+            entries.append(SimpleEntry(date: nextDate, events: [event1, event2], configuration: configuration))
+            entries.append(SimpleEntry(date: event1.startDate, events: [event2], configuration: configuration))
+            if entries[entries.count - 1].date > (Date() + 3600) {
+                timelineReloadPolicy = .after(Date() + 3600)
+            }
+        case 3:
+            let event1 = EventsModelWidget.cretate(eKEvent: eKEvents[0])
+            let event2 = EventsModelWidget.cretate(eKEvent: eKEvents[1])
+            let event3 = EventsModelWidget.cretate(eKEvent: eKEvents[2])
+            entries.append(SimpleEntry(date: nextDate, events: [event1, event2, event3], configuration: configuration))
+            entries.append(SimpleEntry(date: event1.startDate, events: [event2, event3], configuration: configuration))
+            if entries[entries.count - 1].date > (Date() + 3600) {
+                timelineReloadPolicy = .after(Date() + 3600)
+            }
         default:
             let event1 = EventsModelWidget.cretate(eKEvent: eKEvents[0])
             let event2 = EventsModelWidget.cretate(eKEvent: eKEvents[1])
             let event3 = EventsModelWidget.cretate(eKEvent: eKEvents[2])
-            entries.append(SimpleEntry(date: nextDate, events: [event1, event2], configuration: configuration))
-            entries.append(SimpleEntry(date: event1.startDate, events: [event2, event3], configuration: configuration))
+            let event4 = EventsModelWidget.cretate(eKEvent: eKEvents[3])
+            entries.append(SimpleEntry(date: nextDate, events: [event1, event2, event3], configuration: configuration))
+            entries.append(SimpleEntry(date: event1.startDate, events: [event2, event3, event4], configuration: configuration))
             if entries[entries.count - 1].date > (Date() + 3600) {
                 timelineReloadPolicy = .after(Date() + 3600)
             }
@@ -279,11 +298,11 @@ struct LargeView : View {
                         .frame(width: geometry.size.width, height: 1, alignment: .center)
                     LargeViewCell(event: entry.events[1])
                 }
-                if entry.events.count > 1 {
+                if entry.events.count > 2 {
                     RoundedRectangle(cornerRadius: 3, style: .circular)
                         .fill(.gray)
                         .frame(width: geometry.size.width, height: 1, alignment: .center)
-                    LargeViewCell(event: entry.events[1])
+                    LargeViewCell(event: entry.events[2])
                 }
             }
         }
