@@ -45,7 +45,7 @@ struct Provider: IntentTimelineProvider {
         let selectCalendar = configuration.calendar?.displayString ?? ""
         let selectCalendars = self.getCalendar(calendarName: selectCalendar)
         let eKEvents = getEvents(selectCalendars: selectCalendars)
-        var nextDate = Date()
+        let nextDate = Date()
         var timelineReloadPolicy: TimelineReloadPolicy = .atEnd
 
         switch(eKEvents.count) {
