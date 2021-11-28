@@ -253,6 +253,7 @@ struct SmallView : View {
             }
             Text(entry.events[0].title)
                 .font(.footnote)
+                .truncationMode(.middle)
             if entry.events[0].isNoEvent == false && Date() <= entry.events[0].startDate {
                 Text(entry.events[0].startDate, style: .timer)
                     .font(.footnote)
@@ -299,13 +300,13 @@ struct LargeView : View {
                 LargeViewCell(event: entry.events[0])
                 if entry.events.count > 1 {
                     RoundedRectangle(cornerRadius: 3, style: .circular)
-                        .fill(.gray)
+                        .fill(entry.events[1].calendarColor)
                         .frame(width: geometry.size.width, height: 1, alignment: .center)
                     LargeViewCell(event: entry.events[1])
                 }
                 if entry.events.count > 2 {
                     RoundedRectangle(cornerRadius: 3, style: .circular)
-                        .fill(.gray)
+                        .fill(entry.events[2].calendarColor)
                         .frame(width: geometry.size.width, height: 1, alignment: .center)
                     LargeViewCell(event: entry.events[2])
                 }
