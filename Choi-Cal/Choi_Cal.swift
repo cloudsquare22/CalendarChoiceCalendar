@@ -266,28 +266,7 @@ struct MiddleView : View {
     let entry: Provider.Entry
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8.0) {
-            if entry.events[0].isNoEvent == false {
-                Text(entry.events[0].dispStartEndDate)
-                    .font(.footnote)
-            }
-            Text(entry.events[0].title)
-                .font(.footnote)
-                .truncationMode(.middle)
-                .lineLimit(1)
-            if entry.events[0].location.isEmpty == false {
-                HStack {
-                    Image(systemName: "location")
-                        .font(.footnote)
-                    Text(entry.events[0].location)
-                        .font(.footnote)
-                }
-            }
-            if entry.events[0].isNoEvent == false && Date() <= entry.events[0].startDate {
-                Text(entry.events[0].startDate, style: .timer)
-                    .font(.footnote)
-            }
-        }
+        LargeViewCell(event: entry.events[0])
     }
 }
 
@@ -319,25 +298,30 @@ struct LargeViewCell : View {
     var event: EventsModelWidget
     
     var body: some View {
-        if event.isNoEvent == false {
-            Text(event.dispStartEndDate)
-                .font(.footnote)
-        }
-        Text(event.title)
-            .font(.footnote)
-            .truncationMode(.middle)
-            .lineLimit(1)
-        if event.location.isEmpty == false {
-            HStack {
-                Image(systemName: "location")
-                    .font(.footnote)
-                Text(event.location)
-                    .font(.footnote)
+        VStack(alignment: .leading, spacing: 8.0) {
+            if event.isNoEvent == false {
+                HStack {
+                    Text(event.dispStartEndDate)
+                        .font(.footnote)
+                    if Date() <= event.startDate {
+                        Text(event.startDate, style: .timer)
+                            .font(.footnote)
+                    }
+                }
             }
-        }
-        if event.isNoEvent == false && Date() <= event.startDate {
-            Text(event.startDate, style: .timer)
+            Text(event.title)
                 .font(.footnote)
+//                .truncationMode(.middle)
+                .lineLimit(1)
+            if event.location.isEmpty == false {
+                HStack {
+                    Image(systemName: "location")
+                        .font(.footnote)
+                    Text(event.location)
+                        .font(.footnote)
+                        .lineLimit(1)
+                }
+            }
         }
     }
 }
