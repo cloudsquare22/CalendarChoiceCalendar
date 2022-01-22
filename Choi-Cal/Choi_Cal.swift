@@ -24,14 +24,29 @@ struct Provider: IntentTimelineProvider {
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let selectCalendar = configuration.calendar?.displayString ?? ""
+        let selectCalendar = configuration.calendar?.displayString ?? "No select"
         let selectCalendars = self.getCalendar(calendarName: selectCalendar)
         let eKEvents = getEvents(selectCalendars: selectCalendars)
-        var event = EventsModelWidget()
-        if eKEvents.count > 0 {
-            event = EventsModelWidget.cretate(eKEvent: eKEvents[0])
+        var events: [EventsModelWidget] = []
+        switch(eKEvents.count) {
+        case 0:
+            let event = EventsModelWidget()
+            event.title = "No Next Event"
+            event.calenderTitle = selectCalendar
+            event.isNoEvent = true
+            events.append(event)
+            break
+        case 1:
+            let event = EventsModelWidget.cretate(eKEvent: eKEvents[0])
+            events.append(event)
+            break
+        case 2:
+            events = self.createTimeEvents(range: 0...1, eKEvents: eKEvents)
+            break
+        default:
+            events = self.createTimeEvents(range: 0...2, eKEvents: eKEvents)
         }
-        let entry = SimpleEntry(date: Date(), events: [event], configuration: configuration)
+        let entry = SimpleEntry(date: Date(), events: events, configuration: configuration)
         completion(entry)
     }
 

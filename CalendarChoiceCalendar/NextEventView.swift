@@ -109,6 +109,7 @@ struct EmptyEventView: View {
             }
             HStack {
                 Text("No event")
+                    .padding(.leading)
                 Spacer()
             }
         }
