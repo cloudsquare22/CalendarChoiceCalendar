@@ -13,17 +13,17 @@ import EventKit
 struct Provider: IntentTimelineProvider {
     let eventStore = EKEventStore()
     
-    func placeholder(in context: Context) -> SimpleEntry {
+    func placeholder(in context: Context) -> NeCalTimelineEntry {
         print(#function)
         let event = EventsModelWidget()
         event.startDate = Date()
         event.title = "Event xxx"
         event.calenderTitle = "Calendar xxx"
         event.calendarColor = .red
-        return SimpleEntry(date: Date(), events: [event], configuration: ConfigurationIntent())
+        return NeCalTimelineEntry(date: Date(), events: [event], configuration: ConfigurationIntent())
     }
 
-    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
+    func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (NeCalTimelineEntry) -> ()) {
         let selectCalendar = configuration.calendar?.displayString ?? "No select"
         let selectCalendars = self.getCalendar(calendarName: selectCalendar)
         let eKEvents = getEvents(selectCalendars: selectCalendars)
@@ -46,7 +46,7 @@ struct Provider: IntentTimelineProvider {
         default:
             events = self.createTimeEvents(range: 0...2, eKEvents: eKEvents)
         }
-        let entry = SimpleEntry(date: Date(), events: events, configuration: configuration)
+        let entry = NeCalTimelineEntry(date: Date(), events: events, configuration: configuration)
         completion(entry)
     }
 
@@ -55,7 +55,7 @@ struct Provider: IntentTimelineProvider {
         
 //        print(configuration.calendar?.displayString)
         
-        var entries: [SimpleEntry] = []
+        var entries: [NeCalTimelineEntry] = []
         
         let selectCalendar = configuration.calendar?.displayString ?? ""
         let selectCalendars = self.getCalendar(calendarName: selectCalendar)
@@ -72,36 +72,36 @@ struct Provider: IntentTimelineProvider {
             if selectCalendars.count > 0 {
                 event.calendarColor = Color(selectCalendars[0].cgColor)
             }
-            let entry = SimpleEntry(date: Date(), events: [event], configuration: configuration)
+            let entry = NeCalTimelineEntry(date: Date(), events: [event], configuration: configuration)
             entries.append(entry)
             timelineReloadPolicy = .after(Date() + 3600)
         case 1:
             let event1 = EventsModelWidget.cretate(eKEvent: eKEvents[0])
-            entries.append(SimpleEntry(date: nextDate, events: [event1], configuration: configuration))
+            entries.append(NeCalTimelineEntry(date: nextDate, events: [event1], configuration: configuration))
             if entries[entries.count - 1].date > (Date() + 3600) {
                 timelineReloadPolicy = .after(Date() + 3600)
             }
         case 2:
             let time1Events = self.createTimeEvents(range: 0...1, eKEvents: eKEvents)
             let time2Events = self.createTimeEvents(range: 1...1, eKEvents: eKEvents)
-            entries.append(SimpleEntry(date: nextDate, events: time1Events, configuration: configuration))
-            entries.append(SimpleEntry(date: time1Events[0].startDate, events: time2Events, configuration: configuration))
+            entries.append(NeCalTimelineEntry(date: nextDate, events: time1Events, configuration: configuration))
+            entries.append(NeCalTimelineEntry(date: time1Events[0].startDate, events: time2Events, configuration: configuration))
             if entries[entries.count - 1].date > (Date() + 3600) {
                 timelineReloadPolicy = .after(Date() + 3600)
             }
         case 3:
             let time1Events = self.createTimeEvents(range: 0...2, eKEvents: eKEvents)
             let time2Events = self.createTimeEvents(range: 1...2, eKEvents: eKEvents)
-            entries.append(SimpleEntry(date: nextDate, events: time1Events, configuration: configuration))
-            entries.append(SimpleEntry(date: time1Events[0].startDate, events: time2Events, configuration: configuration))
+            entries.append(NeCalTimelineEntry(date: nextDate, events: time1Events, configuration: configuration))
+            entries.append(NeCalTimelineEntry(date: time1Events[0].startDate, events: time2Events, configuration: configuration))
             if entries[entries.count - 1].date > (Date() + 3600) {
                 timelineReloadPolicy = .after(Date() + 3600)
             }
         default:
             let time1Events = self.createTimeEvents(range: 0...2, eKEvents: eKEvents)
             let time2Events = self.createTimeEvents(range: 1...3, eKEvents: eKEvents)
-            entries.append(SimpleEntry(date: nextDate, events: time1Events, configuration: configuration))
-            entries.append(SimpleEntry(date: time1Events[0].startDate, events: time2Events, configuration: configuration))
+            entries.append(NeCalTimelineEntry(date: nextDate, events: time1Events, configuration: configuration))
+            entries.append(NeCalTimelineEntry(date: time1Events[0].startDate, events: time2Events, configuration: configuration))
             if entries[entries.count - 1].date > (Date() + 3600) {
                 timelineReloadPolicy = .after(Date() + 3600)
             }
@@ -177,7 +177,7 @@ struct Provider: IntentTimelineProvider {
 
 }
 
-struct SimpleEntry: TimelineEntry {
+struct NeCalTimelineEntry: TimelineEntry {
     let date: Date
     let events: [EventsModelWidget]
     let configuration: ConfigurationIntent
@@ -238,17 +238,17 @@ struct Choi_Cal_Previews: PreviewProvider {
     static let event = EventsModelWidget()
     static var previews: some View {
         Group {
-            Choi_CalEntryView(entry: SimpleEntry(date: Date(), events: [Choi_Cal_Previews.event], configuration: ConfigurationIntent()))
+            Choi_CalEntryView(entry: NeCalTimelineEntry(date: Date(), events: [Choi_Cal_Previews.event], configuration: ConfigurationIntent()))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
             
-            Choi_CalEntryView(entry: SimpleEntry(date: Date(), events: [Choi_Cal_Previews.event], configuration: ConfigurationIntent()))
+            Choi_CalEntryView(entry: NeCalTimelineEntry(date: Date(), events: [Choi_Cal_Previews.event], configuration: ConfigurationIntent()))
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
 
-            Choi_CalEntryView(entry: SimpleEntry(date: Date(), events: [Choi_Cal_Previews.event], configuration: ConfigurationIntent()))
+            Choi_CalEntryView(entry: NeCalTimelineEntry(date: Date(), events: [Choi_Cal_Previews.event], configuration: ConfigurationIntent()))
                 .previewContext(WidgetPreviewContext(family: .systemLarge))
 
             if #available(iOSApplicationExtension 15.0, *) {
-                Choi_CalEntryView(entry: SimpleEntry(date: Date(), events: [Choi_Cal_Previews.event], configuration: ConfigurationIntent()))
+                Choi_CalEntryView(entry: NeCalTimelineEntry(date: Date(), events: [Choi_Cal_Previews.event], configuration: ConfigurationIntent()))
                     .previewContext(WidgetPreviewContext(family: .systemExtraLarge))
             } else {
                 // Fallback on earlier versions

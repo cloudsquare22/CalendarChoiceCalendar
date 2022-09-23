@@ -7,12 +7,12 @@
 		<key>CalendarChoiceCalendar.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>2</integer>
 		</dict>
 		<key>CalendarIntent.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
 		<key>CalendarIntentUI.xcscheme_^#shared#^_</key>
 		<dict>
@@ -22,7 +22,7 @@
 		<key>Choi-CalExtension.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>1</integer>
 		</dict>
 		<key>SelectCalendar.xcscheme_^#shared#^_</key>
 		<dict>
@@ -43,6 +43,24 @@
 		<dict>
 			<key>orderHint</key>
 			<integer>5</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>8D543B6A2529ACAC00A64939</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8D543B97252D1A7900A64939</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8D7D275B254D877C00853530</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
