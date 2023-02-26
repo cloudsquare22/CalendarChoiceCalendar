@@ -23,7 +23,7 @@ struct MainView: View {
                     Label("Calendar", systemImage: "calendar")
                 }
                 .tag(0)
-            NextEventView()
+            NextEventListView()
                 .tabItem {
                     Label("Next Event", systemImage: "deskclock")
                 }

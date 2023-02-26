@@ -8,19 +8,19 @@
 import SwiftUI
 import EventKit
 
-struct NextEventView: View {
+struct NextEventListView: View {
     @EnvironmentObject var eventsModel: EventsModel
     @State var openSheet: Bool = false
     @State var sheetCalendar: EKCalendar? = nil
 
-    fileprivate func ForEachEventDispModel() -> ForEach<[EventDispModel], UUID, _ConditionalContent<EventView, EmptyEventView>?> {
+    fileprivate func ForEachEventDispModel() -> ForEach<[EventDispModel], UUID, _ConditionalContent<NextEventView, NextEventEmptyView>?> {
         return ForEach(self.eventsModel.nextEvents) { event in
             if event.isOn == true {
                 if event.eventTitle.isEmpty == false {
-                    EventView(event: event)
+                    NextEventView(event: event)
                 }
                 else {
-                    EmptyEventView(event: event)
+                    NextEventEmptyView(event: event)
                 }
             }
         }
@@ -64,12 +64,12 @@ struct NextEventView: View {
 
 struct NextEventView_Previews: PreviewProvider {
     static var previews: some View {
-        NextEventView()
+        NextEventListView()
             .environmentObject(EventsModel())
     }
 }
 
-struct EventView: View {
+struct NextEventView: View {
     @EnvironmentObject var eventsModel: EventsModel
     let event: EventDispModel
     
@@ -97,7 +97,7 @@ struct EventView: View {
     }
 }
 
-struct EmptyEventView: View {
+struct NextEventEmptyView: View {
     let event: EventDispModel
 
     var body: some View {
