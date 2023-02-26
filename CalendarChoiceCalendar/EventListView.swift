@@ -16,7 +16,7 @@ struct EventListView: View {
     var body: some View {
         List {
             ForEach(self.eventList) { event in
-                EventRowView(event: event)
+                EventView(event: event)
             }
         }
         .listStyle(PlainListStyle())
@@ -31,7 +31,7 @@ struct EventListView_Previews: PreviewProvider {
     }
 }
 
-struct EventRowView: View {
+struct EventView: View {
     @EnvironmentObject var eventsModel: EventsModel
     let event: EventDispModel
     @State var copyEvent = false
