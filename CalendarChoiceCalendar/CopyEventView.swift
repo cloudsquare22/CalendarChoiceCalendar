@@ -44,10 +44,10 @@ struct CopyEventView: View {
                 }
     //            Spacer()
                 Picker(selection: self.$selection, label: Text("Calendar"), content: {
-                    ForEach(0..<self.eventsModel.nextEvents.count) { index in
-                        Text(self.eventsModel.nextEvents[index].calendar.title)
-                            .foregroundColor(Color(self.eventsModel.nextEvents[index].calendar.cgColor))
-                            .tag(index)
+                    ForEach(self.eventsModel.nextEvents) { nextEvent in
+                        Text(nextEvent.calendar.title)
+                            .foregroundColor(Color(nextEvent.calendar.cgColor))
+                            .tag(nextEvent.index)
                             .padding()
                     }
                 })
