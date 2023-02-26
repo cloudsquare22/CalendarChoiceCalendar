@@ -229,7 +229,7 @@ struct Choi_Cal: Widget {
             Choi_CalEntryView(entry: entry)
         }
         .configurationDisplayName("neCal")
-        .description(NSLocalizedString("Select the calendar to display.", comment: ""))
+        .description(NSLocalizedString("Displays the next event for the specified calendar.", comment: ""))
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
     }
 }

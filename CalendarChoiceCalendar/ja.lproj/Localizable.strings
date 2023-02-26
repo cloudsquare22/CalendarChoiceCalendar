@@ -11,4 +11,4 @@
 "About" = "neCalについて";
 "Copy to calendar" = "カレンダーをコピーする";
 "No event" = "イベントはありません";
-"Select the calendar to display." = "表示するカレンダー選択。";
+"Displays the next event for the specified calendar." = "指定カレンダーの次イベントを表示します。";
