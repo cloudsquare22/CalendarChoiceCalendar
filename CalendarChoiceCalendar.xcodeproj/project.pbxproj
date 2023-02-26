@@ -22,11 +22,11 @@
 		8D543B9D252D1A7900A64939 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D543B9C252D1A7900A64939 /* SwiftUI.framework */; };
 		8D543BA0252D1A7900A64939 /* Choi_Cal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D543B9F252D1A7900A64939 /* Choi_Cal.swift */; };
 		8D543BA3252D1A7A00A64939 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D543BA2252D1A7A00A64939 /* Assets.xcassets */; };
-		8D543BA9252D1A7A00A64939 /* Choi-CalExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8D543B98252D1A7900A64939 /* Choi-CalExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8D543BA9252D1A7A00A64939 /* Choi-CalExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8D543B98252D1A7900A64939 /* Choi-CalExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8D753D542563287B007386CB /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D753D532563287B007386CB /* SettingView.swift */; };
 		8D7D268B254D82D000853530 /* Choi_Cal.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D268A254D82D000853530 /* Choi_Cal.intentdefinition */; };
 		8D7D275F254D877C00853530 /* IntentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D7D275E254D877C00853530 /* IntentHandler.swift */; };
-		8D7D2773254D877C00853530 /* CalendarIntent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 8D7D275C254D877C00853530 /* CalendarIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8D7D2773254D877C00853530 /* CalendarIntent.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8D7D275C254D877C00853530 /* CalendarIntent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		8D91C4D5253DBC54006ABF39 /* NextEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91C4D4253DBC54006ABF39 /* NextEventView.swift */; };
 		8D91C4D9253DBF2E006ABF39 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D91C4D8253DBF2E006ABF39 /* CalendarView.swift */; };
 		8DA8139F259E9A0800E5649C /* CopyEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DA8139E259E9A0800E5649C /* CopyEventView.swift */; };
@@ -52,16 +52,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		8D543BAD252D1A7A00A64939 /* Embed App Extensions */ = {
+		8D543BAD252D1A7A00A64939 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				8D7D2773254D877C00853530 /* CalendarIntent.appex in Embed App Extensions */,
-				8D543BA9252D1A7A00A64939 /* Choi-CalExtension.appex in Embed App Extensions */,
+				8D7D2773254D877C00853530 /* CalendarIntent.appex in Embed Foundation Extensions */,
+				8D543BA9252D1A7A00A64939 /* Choi-CalExtension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -217,7 +217,7 @@
 				8D543B672529ACAC00A64939 /* Sources */,
 				8D543B682529ACAC00A64939 /* Frameworks */,
 				8D543B692529ACAC00A64939 /* Resources */,
-				8D543BAD252D1A7A00A64939 /* Embed App Extensions */,
+				8D543BAD252D1A7A00A64939 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -271,7 +271,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1210;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					8D543B6A2529ACAC00A64939 = {
 						CreatedOnToolsVersion = 12.0.1;
@@ -533,6 +533,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CalendarChoiceCalendar/Preview Content\"";
 				DEVELOPMENT_TEAM = 385NJ9XLA7;
 				ENABLE_PREVIEWS = YES;
@@ -542,7 +543,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.cloudsquare.ios.neCal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -557,6 +558,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"CalendarChoiceCalendar/Preview Content\"";
 				DEVELOPMENT_TEAM = 385NJ9XLA7;
 				ENABLE_PREVIEWS = YES;
@@ -566,7 +568,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.cloudsquare.ios.neCal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -587,7 +589,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.cloudsquare.ios.neCal.Choi-Cal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -609,7 +611,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = "jp.cloudsquare.ios.neCal.Choi-Cal";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -630,7 +632,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.cloudsquare.ios.neCal.CalendarIntent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -651,7 +653,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.cloudsquare.ios.neCal.CalendarIntent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
