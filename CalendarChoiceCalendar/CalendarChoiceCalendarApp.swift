@@ -23,10 +23,30 @@ struct CalendarChoiceCalendarApp: App {
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        if EKEventStore.authorizationStatus(for: .event) != .authorized {
-            let eventStore = EKEventStore()
-            eventStore.requestAccess(to: .event) { (access, _) in
-                print("EKEventStore requestAccess: \(access)")
+        print(#function)
+        let authorizationStatus = EKEventStore.authorizationStatus(for: .event)
+        let eventStore = EKEventStore()
+        print("EKEventStore.authorizationStatus:\(authorizationStatus)")
+        if #available(iOS 17.0, *) {
+            if authorizationStatus == .fullAccess {
+                print("iOS17*:Access OK")
+            }
+            else if authorizationStatus == .notDetermined {
+                eventStore.requestFullAccessToEvents(completion: { (granted, error) in
+                    if granted {
+                        print("iOS17*:Accessible")
+                    }
+                    else {
+                        print("iOS17*:Access denied")
+                    }
+                })
+            }
+        }
+        else {
+            if EKEventStore.authorizationStatus(for: .event) != .authorized {
+                eventStore.requestAccess(to: .event) { (access, _) in
+                    print("EKEventStore requestAccess: \(access)")
+                }
             }
         }
         return true
