@@ -218,6 +218,7 @@ struct Choi_CalEntryView : View {
             .widgetURL(self.entry.events[0].url)
         }
         .padding(8)
+        .widgetBackground(Color.clear)
     }
 }
 
@@ -232,6 +233,7 @@ struct Choi_Cal: Widget {
         .configurationDisplayName("neCal")
         .description(NSLocalizedString("Displays the next event for the specified calendar.", comment: ""))
         .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .contentMarginsDisabled()
     }
 }
 
@@ -397,5 +399,17 @@ class EventsModelWidget {
         event.calendarColor = Color(eKEvent.calendar.cgColor)
         event.calendarIdentifier = eKEvent.calendar.calendarIdentifier
         return event
+    }
+}
+
+extension View {
+    func widgetBackground(_ backgroundView: some View) -> some View {
+        if #available(iOSApplicationExtension 17.0, *) {
+            return containerBackground(for: .widget) {
+                backgroundView
+            }
+        } else {
+            return background(backgroundView)
+        }
     }
 }
