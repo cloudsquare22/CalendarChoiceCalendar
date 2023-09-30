@@ -299,16 +299,19 @@ struct LargeView : View {
                     RoundedRectangle(cornerRadius: 3, style: .circular)
                         .fill(entry.events[1].calendarColor)
                         .frame(width: geometry.size.width, height: 1, alignment: .center)
-                        .padding(EdgeInsets(top: 8.0, leading: 0.0, bottom: 8.0, trailing: 0.0))
+                        .padding(EdgeInsets(top: 4.0, leading: 0.0, bottom: 4.0, trailing: 0.0))
                     LargeViewCell(event: entry.events[1])
                 }
                 if entry.events.count > 2 {
                     RoundedRectangle(cornerRadius: 3, style: .circular)
                         .fill(entry.events[2].calendarColor)
                         .frame(width: geometry.size.width, height: 1, alignment: .center)
-                        .padding(EdgeInsets(top: 8.0, leading: 0.0, bottom: 8.0, trailing: 0.0))
+                        .padding(EdgeInsets(top: 4.0, leading: 0.0, bottom: 4.0, trailing: 0.0))
                     LargeViewCell(event: entry.events[2])
                 }
+            }
+            .onAppear() {
+                print("\(geometry.size)")
             }
         }
     }
