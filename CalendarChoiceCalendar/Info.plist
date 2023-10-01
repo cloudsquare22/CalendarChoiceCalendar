@@ -22,9 +22,9 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSCalendarsFullAccessUsageDescription</key>
-	<string>It is used to display events.</string>
 	<key>NSCalendarsUsageDescription</key>
+	<string>It is used to display events.</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
 	<string>It is used to display events.</string>
 	<key>NSUserActivityTypes</key>
 	<array>

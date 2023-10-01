@@ -7,3 +7,4 @@
 */
 
 "NSCalendarsUsageDescription" = "イベントを表示するために使用します。";
+"NSCalendarsFullAccessUsageDescription" = "イベントを表示するために使用します。";
