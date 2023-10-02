@@ -34,7 +34,7 @@ struct CopyEventView: View {
                         .padding(8.0)
                     RoundedRectangle(cornerRadius: 3, style: .circular)
                         .fill(Color(self.event.calendar.cgColor))
-                        .frame(width: geometry.size.width - 16, height: 3, alignment: .center)
+                        .frame(width: abs(geometry.size.width - 16), height: 3, alignment: .center)
                     Text(self.event.eventTitle)
                         .font(.title3)
                         .padding(8.0)
@@ -57,33 +57,16 @@ struct CopyEventView: View {
                     RoundedRectangle(cornerRadius: 16)
                         .stroke(Color("blackAndWhite"), lineWidth: 1)
                 )
-    //            Spacer()
-                if #available(iOS 15.0, *) {
-                    Button(action: {
-                        EventsModel.copyCalendar(eventDispModel: self.event, selectCalendar: self.eventsModel.nextEvents[self.selection].calendar)
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Text("Copy to calendar")
-                            .font(.title2)
-                            .padding(8)
-                    })
-                        .padding(8.0)
-                        .buttonStyle(.borderedProminent)
-                } else {
-                    Button(action: {
-                        EventsModel.copyCalendar(eventDispModel: self.event, selectCalendar: self.eventsModel.nextEvents[self.selection].calendar)
-                        self.presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Text("Copy to calendar")
-                            .font(.title2)
-                            .padding(16)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color.blue, lineWidth: 1)
-                            )
-                    })
-                        .padding(8.0)
-                }
+                Button(action: {
+                    EventsModel.copyCalendar(eventDispModel: self.event, selectCalendar: self.eventsModel.nextEvents[self.selection].calendar)
+                    self.presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Text("Copy to calendar")
+                        .font(.title2)
+                        .padding(8)
+                })
+                    .padding(8.0)
+                    .buttonStyle(.borderedProminent)
                 Spacer()
             }
             .padding(8)
