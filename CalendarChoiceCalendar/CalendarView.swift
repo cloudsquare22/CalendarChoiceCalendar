@@ -18,35 +18,20 @@ struct CalendarView: View {
     
     var body: some View {
         NavigationView {
-            if #available(iOS 15.0, *) {
-                List {
-                    ForEachEventDispModel()
-                }
-                .refreshable {
-                    self.eventsModel.updateNextEvents()
-                }
-                .listStyle(PlainListStyle())
-                .navigationTitle("Calendar")
-                .navigationBarTitleDisplayMode(.large)
-                .navigationBarItems(trailing: Image(systemName: "arrow.triangle.2.circlepath")
-                                        .foregroundColor(.blue)
-                                        .onTapGesture {
-                    self.eventsModel.updateNextEvents()
-                })
+            List {
+                ForEachEventDispModel()
             }
-            else {
-                List {
-                    ForEachEventDispModel()
-                }
-                .listStyle(PlainListStyle())
-                .navigationTitle("Calendar")
-                .navigationBarTitleDisplayMode(.large)
-                .navigationBarItems(trailing: Image(systemName: "arrow.triangle.2.circlepath")
-                                        .foregroundColor(.blue)
-                                        .onTapGesture {
-                    self.eventsModel.updateNextEvents()
-                })
+            .refreshable {
+                self.eventsModel.updateNextEvents()
             }
+            .listStyle(PlainListStyle())
+            .navigationTitle("Calendar")
+            .navigationBarTitleDisplayMode(.large)
+            .navigationBarItems(trailing: Image(systemName: "arrow.triangle.2.circlepath")
+                                    .foregroundColor(.blue)
+                                    .onTapGesture {
+                self.eventsModel.updateNextEvents()
+            })
         }
         .navigationViewStyle(StackNavigationViewStyle())
     }
