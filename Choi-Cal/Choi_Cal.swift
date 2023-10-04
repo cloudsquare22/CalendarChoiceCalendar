@@ -222,7 +222,7 @@ struct Choi_CalEntryView : View {
     }
 }
 
-@main
+//@main
 struct Choi_Cal: Widget {
     let kind: String = "jp.cloudsquare.ios.neCal.widget"
 
@@ -414,5 +414,63 @@ extension View {
         } else {
             return background(backgroundView)
         }
+    }
+}
+
+@available(iOSApplicationExtension 17.0, *)
+struct CalWidgetAccessory: Widget {
+    let kind: String = "Accessory"
+
+    var body: some WidgetConfiguration {
+        IntentConfiguration(kind: kind, intent: ConfigurationIntent.self, provider: Provider()) { entry in
+            CalWidgetAccessoryEntryView(entry: entry)
+        }
+        .configurationDisplayName("Accessory")
+        .description(NSLocalizedString("Displays the next event for the specified calendar.", comment: ""))
+        .supportedFamilies([.accessoryRectangular])
+        .contentMarginsDisabled()
+    }
+}
+
+struct CalWidgetAccessoryEntryView : View {
+    var entry: Provider.Entry
+    
+    @Environment(\.widgetFamily) var family
+    
+    var body: some View {
+        GeometryReader { geometry in
+            VStack(alignment: .leading) {
+//                HStack {
+//                    Spacer()
+//                    Text(entry.events[0].calenderTitle)
+//                        .font(.caption)
+//                        .lineLimit(1)
+//                    Spacer()
+//                }
+                switch family {
+                case .accessoryInline:
+                    Text("-")
+                case .accessoryRectangular:
+                    if entry.events[0].isNoEvent == false {
+                        Text(entry.events[0].dispStartDate)
+//                            .font(.caption)
+//                        if Date() <= entry.events[0].startDate {
+//                            Text(entry.events[0].startDate, style: .timer)
+//                                .font(.footnote)
+//                        }
+                    }
+                    Text(entry.events[0].title)
+//                        .font(.caption)
+                        .lineLimit(2)
+                case .accessoryCircular:
+                    Text("-")
+                case .systemSmall:
+                    Text("-")
+                default:
+                    Text("-")
+                }
+            }
+        }
+        .widgetBackground(Color.clear)
     }
 }
